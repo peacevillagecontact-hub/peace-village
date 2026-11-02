@@ -7,7 +7,7 @@ Backed by Supabase (database + file storage). Hosted free on GitHub Pages.
 
 - `index.html`, `manifesto.html`, `contribute.html`, `forum.html`, `resources.html`, `about.html` — the pages.
 - `assets/css/style.css` — all styling, one file.
-- `assets/js/config.js` — **edit this first** (Supabase + Turnstile keys, BTC address).
+- `assets/js/config.js` — site configuration (Supabase, Turnstile, donation addresses). Already filled in — see below.
 - `assets/js/*.js` — page logic (plain JavaScript, no framework, no build).
 - `supabase/migrations/001_initial_schema.sql` — run this once in the Supabase SQL editor (already run for you — see below).
 
@@ -17,16 +17,16 @@ Backed by Supabase (database + file storage). Hosted free on GitHub Pages.
    `peacevillagecontact-hub's Project` Supabase project (tables, RLS policies, and the `contributions_view`
    are live). If you ever need to re-create them from scratch (e.g. a new Supabase project), paste that
    file's contents into SQL Editor → New query → Run.
-2. **Supabase keys**: Project Settings → API → copy the "Project URL" and the "anon public" key into
-   `assets/js/config.js`.
-3. **Cloudflare Turnstile** (free spam protection): dashboard.cloudflare.com → Turnstile → Add widget →
-   pick "Managed" → copy the **Site Key** into `assets/js/config.js`.
-4. **Bitcoin donation**: put your BTC address in `assets/js/config.js` (`BTC_ADDRESS`), and add your QR
-   code image as `assets/images/btc-qr.jpg` (copy it from the old site's `public/images/btc-qr-cropped.png`).
-5. **Hero image**: add the homepage photo as `assets/images/hero.jpg` (copy from the old site's
-   `public/images/IMG_1108.jpg`).
-6. **GitHub Pages**: this repo's Settings → Pages → Source: "Deploy from a branch" → Branch: `main` / `/ (root)` → Save.
-   Your site will be live at `https://peacevillagecontact-hub.github.io/peace-village/`.
+2. **Supabase keys**: ✅ already done — real `SUPABASE_URL` and the project's publishable key are in `config.js`.
+3. **Cloudflare Turnstile**: ✅ already done — a widget was created for `peacevillagecontact-hub.github.io`
+   and its Site Key is in `config.js`. The matching Secret key stays in the Cloudflare dashboard only
+   (Turnstile → this widget) — it's not used anywhere since there's no server-side verification yet
+   (see SECURITY.md §2 for why, and the mitigation).
+4. **Donations**: ✅ already done — `config.js`'s `DONATION_OPTIONS` carries the real BTC, USDT-TRC20,
+   USDT-Arbitrum One and USDT-SOL addresses (ported from the old Vercel site's donate tab), each with a
+   freshly-generated QR image in `assets/images/`. To change an address or add a network, edit that array.
+5. **Hero image**: ✅ already done — `assets/images/hero.jpg` (from the old site's homepage photo).
+6. **GitHub Pages**: ✅ already done — live at `https://peacevillagecontact-hub.github.io/peace-village/`.
 
 ## Moderating submissions (no extra tool needed)
 

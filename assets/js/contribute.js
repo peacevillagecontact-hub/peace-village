@@ -112,7 +112,32 @@ document.addEventListener("DOMContentLoaded", () => {
     guest_name: d.get("guest_name"),
   }), "location");
 
-  // Static donation info
-  const addrEl = document.getElementById("btc-address");
-  if (addrEl) addrEl.textContent = PV.cfg.BTC_ADDRESS || "Set BTC_ADDRESS in assets/js/config.js";
+  // Static multi-chain donation info (BTC + USDT on TRC20/Arbitrum One/SOL).
+  renderDonationOptions();
 });
+
+function renderDonationOptions() {
+  const options = PV.cfg.DONATION_OPTIONS || [];
+  const tabsEl = document.getElementById("donate-network-tabs");
+  const displayEl = document.getElementById("donate-display");
+  if (!tabsEl || !displayEl || options.length === 0) return;
+
+  function show(key) {
+    const opt = options.find((o) => o.key === key) || options[0];
+    tabsEl.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.key === opt.key));
+    displayEl.innerHTML = `
+      <img src="${PV.escapeHtml(opt.qrImage)}" alt="${PV.escapeHtml(opt.label)} donation QR code">
+      <code class="btc-address">${PV.escapeHtml(opt.address)}</code>
+      <p class="form-note">${PV.escapeHtml(opt.note)}</p>
+    `;
+  }
+
+  tabsEl.innerHTML = options
+    .map((o, i) => `<button type="button" class="tab-btn${i === 0 ? " active" : ""}" data-key="${PV.escapeHtml(o.key)}">${PV.escapeHtml(o.label)}</button>`)
+    .join("");
+  tabsEl.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => show(btn.dataset.key));
+  });
+
+  show(options[0].key);
+}

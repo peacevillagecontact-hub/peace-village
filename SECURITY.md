@@ -26,7 +26,7 @@ Status column: ✅ applied in code/config now · ⏳ needs a one-time manual ste
 
 | Control | Status | Detail |
 |---|---|---|
-| Cloudflare Turnstile on every guest-submission form | ✅ | 5 widgets total: idea, resource, connect, location, forum post. Free, privacy-respecting (no tracking cookies, unlike reCAPTCHA). |
+| Cloudflare Turnstile on every guest-submission form | ✅ | 5 widget instances rendered from one Turnstile site (`Peace Village Static Site`, scoped to `peacevillagecontact-hub.github.io`, created 2026-11-02): idea, resource, connect, location, forum post. Free, privacy-respecting (no tracking cookies, unlike reCAPTCHA). Real site key is live in `config.js`. |
 | Explicit-render pattern, not automatic | ✅ | Turnstile script loads last (bottom of `<body>`, `async defer`), after the page's own JS has defined `window.onloadTurnstileCallback`. This avoids a race condition where Turnstile's `async` script could fire before the callback exists, which would silently skip rendering the widget and leave the form unprotected. |
 | Client validates a Turnstile response exists before insert | ✅ | `contribute.js` / `forum.js`: if a real site key is configured and no token is present, the submit handler blocks and shows an error instead of calling Supabase. |
 | **Server-side Turnstile verification — NOT implemented** | ❌ | This is the one real gap. A static site with no backend cannot call Cloudflare's `siteverify` API (that requires a `TURNSTILE_SECRET_KEY`, which must stay server-side). **Current protection is client-side only**, which stops ordinary bots (they can't solve the challenge) but does **not** stop a determined attacker who reads the anon key from the page source and calls the Supabase REST API directly, bypassing the widget entirely. Mitigations that partially cover this gap, already in place: (a) nothing a spammer inserts is ever publicly visible without manual approval (see §1), so spam cannot deface the live site even if it reaches the database; (b) Supabase has its own platform-level rate limiting on the REST API. If spam volume becomes a real problem, the fix is a small serverless function (e.g. a free Cloudflare Worker or Supabase Edge Function) that verifies the Turnstile token server-side before writing — flagged in `manual.md` as a future improvement, intentionally deferred to keep this a zero-backend, zero-cost static site for now. |
@@ -62,15 +62,26 @@ Status column: ✅ applied in code/config now · ⏳ needs a one-time manual ste
 | No authentication system left exposed | ✅ | The old `auth.users`/login flow is unused by every page; no page collects or stores a password. Guest submissions only ever require a display name. |
 | No leftover auth/profiles/notifications/realtime tables | ✅ | This Supabase project was created fresh for this rebuild and only ever had `001_initial_schema.sql` run against it — there is no old login/auth schema to clean up or worry about. |
 
-## 7. What the owner still needs to do (see README.md for the exact steps)
+## 7. Donation address provenance
 
-1. ~~Run the schema migration~~ ✅ done — `001_initial_schema.sql` has been run against the live project.
-2. Fill in real `SUPABASE_URL` / `SUPABASE_ANON_KEY` in `assets/js/config.js`.
-3. Create a Cloudflare Turnstile widget and fill in `TURNSTILE_SITE_KEY`.
-4. Add the BTC QR code image and `BTC_ADDRESS`.
-5. Periodically check Supabase → Table Editor for pending submissions and approve/reject.
+The 4 donation addresses in `config.js` (`DONATION_OPTIONS`) were copied verbatim, field-by-field, from
+the old Vercel site's live Donate tab (`peacevillage.vercel.app/contribute`) on 2026-11-02 — read directly
+out of the rendered page's input fields, not retyped by hand, to avoid a transcription error with a real
+crypto address. The 4 QR code images in `assets/images/` were freshly generated from those exact address
+strings using the Python `qrcode` library (not copied as images from the old site), so each QR code is
+guaranteed to encode exactly the address text shown next to it. **The owner should still verify at least
+one of these addresses independently** (e.g. check the BTC address against a wallet/exchange record)
+before relying on this page for real donations — Claude has no way to confirm these addresses are
+actually the owner's own wallets beyond what the old site displayed.
 
-## 8. Threat model summary (plain language)
+## 8. What the owner still needs to do (see README.md for the exact steps)
+
+Nothing blocking — all core setup (schema, keys, Turnstile, donations, hero image, GitHub Pages) is done.
+Remaining, non-blocking items are tracked in `manual.md` (content gaps in `manifesto.html`/`about.html`,
+optional pages, Gmail account mismatch). Ongoing: periodically check Supabase → Table Editor for pending
+submissions and approve/reject.
+
+## 9. Threat model summary (plain language)
 
 - **A random bot spamming forms**: stopped by Turnstile (§2) in the common case; even if it gets through, nothing it submits is visible to the public until a human approves it (§1).
 - **Someone reading the page source to find the Supabase key**: expected and harmless — the key only grants exactly what RLS allows (§1), which is "insert as guest" and "read approved rows," nothing more.

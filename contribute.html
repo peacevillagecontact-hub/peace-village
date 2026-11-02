@@ -114,13 +114,13 @@
       </form>
     </div>
 
-    <!-- Donate (static) -->
+    <!-- Donate (static, multi-chain) -->
     <div class="tab-panel" id="panel-donate">
-      <div class="card qr-wrap">
-        <h3 style="margin-top:0;">Donate with Bitcoin</h3>
-        <p>Our community runs on voluntary contributions. Every donation directly supports land, tools, and shared infrastructure.</p>
-        <img src="assets/images/btc-qr.jpg" alt="Bitcoin donation QR code">
-        <code class="btc-address" id="btc-address">loading…</code>
+      <div class="card">
+        <h3 style="margin-top:0;">Donate</h3>
+        <p>Our community runs on voluntary contributions. Every donation directly supports land, tools, and shared infrastructure. Pick a network below — each QR code and address is static (no payment processor, no fees to us beyond the network's own).</p>
+        <div class="tabs" id="donate-network-tabs" role="tablist" aria-label="Donation network"></div>
+        <div class="qr-wrap" id="donate-display"></div>
       </div>
     </div>
   </div>
