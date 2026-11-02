@@ -258,6 +258,7 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
   transition: color 0.15s var(--ease), background-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
 }
 .tab-btn:hover { color: hsl(var(--foreground)); }
+.tab-icon { width: 15px; height: 15px; vertical-align: -3px; margin-right: 0.15rem; flex-shrink: 0; }
 .tab-btn.active { color: hsl(var(--foreground)); background: hsl(var(--background)); box-shadow: var(--shadow-sm); }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; animation: pv-fade-in 0.2s var(--ease); }

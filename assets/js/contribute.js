@@ -245,9 +245,14 @@ function renderDonationOptions() {
     }
   }
 
-  const networkEmoji = (key) => (key.startsWith("btc") ? "₿" : "💵");
+  // Lucide icon markup, matching the style used for the main contribute tabs (and the
+  // v0 reference site's own icon set) rather than emoji — "bitcoin" for BTC networks,
+  // "coins" for USDT ones.
+  const ICON_BITCOIN = '<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727"/></svg>';
+  const ICON_COINS = '<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.744 17.736a6 6 0 1 1-7.48-7.48"/><path d="M15 6h1v4"/><path d="m6.134 14.768.866-.5 2 3.464"/><circle cx="16" cy="8" r="6"/></svg>';
+  const networkIcon = (key) => (key.startsWith("btc") ? ICON_BITCOIN : ICON_COINS);
   tabsEl.innerHTML = options
-    .map((o, i) => `<button type="button" class="tab-btn${i === 0 ? " active" : ""}" data-key="${PV.escapeHtml(o.key)}">${networkEmoji(o.key)} ${PV.escapeHtml(o.label)}</button>`)
+    .map((o, i) => `<button type="button" class="tab-btn${i === 0 ? " active" : ""}" data-key="${PV.escapeHtml(o.key)}">${networkIcon(o.key)} ${PV.escapeHtml(o.label)}</button>`)
     .join("");
   tabsEl.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => show(btn.dataset.key));
