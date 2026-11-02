@@ -116,10 +116,66 @@ document.addEventListener("DOMContentLoaded", () => {
   renderDonationOptions();
 });
 
+// Live BTC/USD price, fetched once from CoinGecko's free public API (no key required,
+// CORS-enabled). Used only to power the calculator below — never trusted for anything
+// that touches money server-side, since there is no server here.
+let BTC_PRICE_USD = null;
+let btcPriceFetchStarted = false;
+
+async function fetchBtcPrice() {
+  if (btcPriceFetchStarted) return;
+  btcPriceFetchStarted = true;
+  try {
+    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
+    if (!res.ok) throw new Error("price API returned " + res.status);
+    const json = await res.json();
+    BTC_PRICE_USD = json?.bitcoin?.usd || null;
+  } catch (e) {
+    BTC_PRICE_USD = null; // calculator below degrades gracefully — address/QR still work without it
+  }
+}
+
+function renderBtcCalculator(container) {
+  if (!BTC_PRICE_USD) {
+    container.hidden = true;
+    container.innerHTML = "";
+    return;
+  }
+  container.hidden = false;
+  container.innerHTML = `
+    <div class="btc-price-row">
+      <span>Bitcoin price</span>
+      <strong>$${BTC_PRICE_USD.toLocaleString("en-US")}</strong>
+    </div>
+    <div class="btc-calc-row">
+      <div class="field" style="margin-bottom:0;">
+        <label for="btc-calc-usd">Amount (USD)</label>
+        <input type="number" id="btc-calc-usd" min="0" step="any" placeholder="e.g. 50">
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <label for="btc-calc-btc">Amount (BTC)</label>
+        <input type="number" id="btc-calc-btc" min="0" step="any" placeholder="e.g. 0.00065">
+      </div>
+    </div>
+    <p class="form-note">Calculator only — for your reference. Price refreshes when you reload the page.</p>
+  `;
+  const usdInput = document.getElementById("btc-calc-usd");
+  const btcInput = document.getElementById("btc-calc-btc");
+  usdInput.addEventListener("input", () => {
+    const usd = parseFloat(usdInput.value);
+    btcInput.value = isFinite(usd) && usd >= 0 ? (usd / BTC_PRICE_USD).toFixed(8) : "";
+  });
+  btcInput.addEventListener("input", () => {
+    const btc = parseFloat(btcInput.value);
+    usdInput.value = isFinite(btc) && btc >= 0 ? (btc * BTC_PRICE_USD).toFixed(2) : "";
+  });
+}
+
 function renderDonationOptions() {
   const options = PV.cfg.DONATION_OPTIONS || [];
   const tabsEl = document.getElementById("donate-network-tabs");
   const displayEl = document.getElementById("donate-display");
+  const calcEl = document.getElementById("btc-calculator");
   if (!tabsEl || !displayEl || options.length === 0) return;
 
   function show(key) {
@@ -130,14 +186,24 @@ function renderDonationOptions() {
       <code class="btc-address">${PV.escapeHtml(opt.address)}</code>
       <p class="form-note">${PV.escapeHtml(opt.note)}</p>
     `;
+    if (calcEl) {
+      if (opt.key.startsWith("btc")) {
+        renderBtcCalculator(calcEl);
+      } else {
+        calcEl.hidden = true;
+        calcEl.innerHTML = "";
+      }
+    }
   }
 
+  const networkEmoji = (key) => (key.startsWith("btc") ? "₿" : "💵");
   tabsEl.innerHTML = options
-    .map((o, i) => `<button type="button" class="tab-btn${i === 0 ? " active" : ""}" data-key="${PV.escapeHtml(o.key)}">${PV.escapeHtml(o.label)}</button>`)
+    .map((o, i) => `<button type="button" class="tab-btn${i === 0 ? " active" : ""}" data-key="${PV.escapeHtml(o.key)}">${networkEmoji(o.key)} ${PV.escapeHtml(o.label)}</button>`)
     .join("");
   tabsEl.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => show(btn.dataset.key));
   });
 
+  fetchBtcPrice().then(() => show(document.querySelector("#donate-network-tabs .tab-btn.active")?.dataset.key || options[0].key));
   show(options[0].key);
 }

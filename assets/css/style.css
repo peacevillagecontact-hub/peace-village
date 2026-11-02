@@ -162,6 +162,11 @@ input[type=text], input[type=email], input[type=tel], input[type=url], textarea,
 .field { margin-bottom: 1rem; }
 .form-note { font-size: 0.85rem; color: hsl(var(--muted-foreground)); margin-top: 0.25rem; }
 
+/* Filters bar (resources page) */
+.filters-bar { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+.filters-bar input[type=text] { flex: 1 1 260px; width: auto; }
+.filters-bar select { flex: 0 1 180px; width: auto; }
+
 /* Tabs (contribute page) */
 .tabs { display: flex; gap: 0.25rem; flex-wrap: wrap; border-bottom: 1px solid hsl(var(--border)); margin-bottom: 1.5rem; }
 .tab-btn {
@@ -220,6 +225,15 @@ input[type=text], input[type=email], input[type=tel], input[type=url], textarea,
   display: block;
   margin-top: 0.75rem;
 }
+
+/* BTC calculator */
+.btc-calculator {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid hsl(var(--border));
+}
+.btc-price-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.btc-calc-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
 
 @media (min-width: 640px) {
   h1 { font-size: 3.5rem; }
