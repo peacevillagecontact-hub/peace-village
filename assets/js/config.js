@@ -13,36 +13,53 @@ window.PEACE_VILLAGE_CONFIG = {
   // Safe to be public; it only identifies the widget, not a secret.
   TURNSTILE_SITE_KEY: "0x4AAAAAAFxM7P72eYlI4_wM",
 
-  // Donation addresses, carried over from the original Vercel site's donate tab.
-  // Each entry: display label, address, and the matching pre-generated QR image in assets/images/.
+  // Donation addresses — Gate exchange deposit addresses, read directly from the owner's
+  // own Gate deposit-QR screenshots (uploaded 2026-11-02). See SECURITY.md §7: these are
+  // CUSTODIAL exchange deposit addresses (funds land in the owner's Gate account), not
+  // self-custody wallets like the previous version of this page used.
+  // Each entry: display label, address, and the matching freshly-generated QR image in assets/images/.
   DONATION_OPTIONS: [
     {
-      key: "btc",
-      label: "Bitcoin (Mainnet)",
-      address: "bc1qk4zc5pjhqemp03yz93n4kf5vuf2u73k2wchf9g9dyw0eysumg76sqdg2e8",
-      qrImage: "assets/images/btc-qr.png",
-      note: "Network fee ~$2-15 · confirmation 10-60 min, varies by congestion.",
+      key: "btc-mainnet",
+      label: "Bitcoin (BTC Network)",
+      address: "1LpLcoecC3x9HvvebLG83Po4snGJg2dF1M",
+      qrImage: "assets/images/btc-mainnet-qr.png",
+      note: "Gate exchange deposit · Minimum deposit 0.000006 BTC · send on the Bitcoin network only.",
+    },
+    {
+      key: "btc-bep20",
+      label: "BTC — BNB Smart Chain (BEP20)",
+      address: "0xA9466EA263aa9bAf86948A2B1C602427783F32Ad",
+      qrImage: "assets/images/btc-bep20-qr.png",
+      note: "Gate exchange deposit · Minimum deposit 0.000006 BTC · send BTC on BNB Smart Chain (BEP20) only.",
     },
     {
       key: "usdt-trc20",
-      label: "USDT — TRC20 (Tron)",
-      address: "THUHqUH1SKLJ6DLMWRynjVqxtjgKj2khWi",
+      label: "USDT — Tron (TRC20)",
+      address: "TRQFaC2icdVGhZV53TuZyGXjmDMDNUiwbd",
       qrImage: "assets/images/usdt-trc20-qr.png",
-      note: "Network fee ~$1-3 · confirmation 1-3 min · TRON network.",
+      note: "Gate exchange deposit · Minimum deposit 0.01 USDT · send on the Tron (TRC20) network only.",
     },
     {
       key: "usdt-arbitrum",
       label: "USDT — Arbitrum One",
-      address: "0x4191d0d1dc7d1fbfe88693579e35809bc7199656",
+      address: "0xA9466EA263aa9bAf86948A2B1C602427783F32Ad",
       qrImage: "assets/images/usdt-arbitrum-qr.png",
-      note: "Send only USDT on the Arbitrum One network to this address.",
+      note: "Gate exchange deposit · Minimum deposit 0.01 USDT · send on the Arbitrum One network only.",
+    },
+    {
+      key: "usdt-bep20",
+      label: "USDT — BNB Smart Chain (BEP20)",
+      address: "0xA9466EA263aa9bAf86948A2B1C602427783F32Ad",
+      qrImage: "assets/images/usdt-bep20-qr.png",
+      note: "Gate exchange deposit · Minimum deposit 0.01 USDT · send on BNB Smart Chain (BEP20) only.",
     },
     {
       key: "usdt-sol",
-      label: "USDT — SOL (Solana)",
-      address: "8JekfK7GoySAGbhjyKh9EznfZqgwo3EqwYQZvkbF1i5k",
+      label: "USDT — Solana (SOL)",
+      address: "Djucxnipvv9FSsksEqVxW2xs641W4AFRfp7Tz7cQn2U4",
       qrImage: "assets/images/usdt-sol-qr.png",
-      note: "Send only USDT on the Solana network to this address.",
+      note: "Gate exchange deposit · Minimum deposit 0.01 USDT · send on the Solana network only.",
     },
   ],
 };

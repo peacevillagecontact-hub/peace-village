@@ -64,15 +64,29 @@ Status column: ✅ applied in code/config now · ⏳ needs a one-time manual ste
 
 ## 7. Donation address provenance
 
-The 4 donation addresses in `config.js` (`DONATION_OPTIONS`) were copied verbatim, field-by-field, from
-the old Vercel site's live Donate tab (`peacevillage.vercel.app/contribute`) on 2026-11-02 — read directly
-out of the rendered page's input fields, not retyped by hand, to avoid a transcription error with a real
-crypto address. The 4 QR code images in `assets/images/` were freshly generated from those exact address
-strings using the Python `qrcode` library (not copied as images from the old site), so each QR code is
-guaranteed to encode exactly the address text shown next to it. **The owner should still verify at least
-one of these addresses independently** (e.g. check the BTC address against a wallet/exchange record)
-before relying on this page for real donations — Claude has no way to confirm these addresses are
-actually the owner's own wallets beyond what the old site displayed.
+**Updated 2026-11-02 (session 5): the donation addresses were replaced.** The original 4 addresses
+(self-custody wallet addresses, ported from the old Vercel site) were fully removed and replaced with
+6 addresses read directly from screenshots the owner uploaded of their own **Gate exchange** deposit
+pages (`Deposit BTC/USDT to Gate`). Each address/network pair in `config.js`'s `DONATION_OPTIONS` was
+read character-by-character from the uploaded image and cross-checked against the screenshot before
+being committed. All 6 QR code images in `assets/images/` were freshly generated from those exact
+address strings using the Python `qrcode` library (never copied as images), so each QR code is
+guaranteed to encode exactly the address text shown next to it.
+
+**Important difference from before — these are now custodial exchange deposit addresses, not
+self-custody wallets.** Funds sent to any of these 6 addresses are deposited into the owner's Gate
+account, not a wallet only the owner controls. This means:
+- The owner is trusting Gate (a third-party exchange) to custody donated funds until withdrawn.
+- 3 of the 6 addresses are the *same* address (`0xA9466...F32Ad`) — this is normal for a CEX, which
+  reuses one deposit address across multiple EVM-compatible chains (BEP20, Arbitrum One) tied to the
+  same account, but donors must still select the exact network shown, or funds can be lost.
+- Each network lists Gate's own stated minimum deposit (e.g. 0.000006 BTC, 0.01 USDT) — a donation
+  below that minimum may not be credited.
+
+**The owner should still independently verify these addresses** (e.g. confirm them directly in their
+own Gate account's deposit screen) before relying on this page for real donations — Claude has no way
+to confirm the uploaded screenshots are current, unaltered, or actually the owner's own Gate account
+beyond what was shown in the images.
 
 ## 8. What the owner still needs to do (see README.md for the exact steps)
 
