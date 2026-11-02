@@ -9,12 +9,14 @@ Backed by Supabase (database + file storage). Hosted free on GitHub Pages.
 - `assets/css/style.css` — all styling, one file.
 - `assets/js/config.js` — **edit this first** (Supabase + Turnstile keys, BTC address).
 - `assets/js/*.js` — page logic (plain JavaScript, no framework, no build).
-- `supabase/migrations/018_add_moderation_status.sql` — run this once in the Supabase SQL editor.
+- `supabase/migrations/001_initial_schema.sql` — run this once in the Supabase SQL editor (already run for you — see below).
 
 ## One-time setup (do these in order)
 
-1. **Supabase**: open your project at supabase.com/dashboard → SQL Editor → paste the contents of
-   `supabase/migrations/018_add_moderation_status.sql` → Run.
+1. **Supabase**: ✅ already done — `supabase/migrations/001_initial_schema.sql` has been run against your
+   `peacevillagecontact-hub's Project` Supabase project (tables, RLS policies, and the `contributions_view`
+   are live). If you ever need to re-create them from scratch (e.g. a new Supabase project), paste that
+   file's contents into SQL Editor → New query → Run.
 2. **Supabase keys**: Project Settings → API → copy the "Project URL" and the "anon public" key into
    `assets/js/config.js`.
 3. **Cloudflare Turnstile** (free spam protection): dashboard.cloudflare.com → Turnstile → Add widget →
