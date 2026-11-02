@@ -205,21 +205,37 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
 .filters-bar input[type=text] { flex: 1 1 260px; width: auto; }
 .filters-bar select { flex: 0 1 180px; width: auto; }
 
-/* Tabs (contribute page) — Apple-style segmented underline tabs */
-.tabs { display: flex; gap: 0.25rem; flex-wrap: wrap; border-bottom: 1px solid hsl(var(--border)); margin-bottom: 1.5rem; }
+/* Tabs — Apple-style segmented pill control. Buttons stay side by side (never wrap to an
+   orphan row): on narrow screens the strip scrolls horizontally instead, with hidden
+   scrollbars and touch/trackpad momentum, so every tab stays reachable and tappable. */
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  background: hsl(var(--secondary));
+  border-radius: 999px;
+  padding: 0.3rem;
+  margin-bottom: 1.5rem;
+}
+.tabs::-webkit-scrollbar { display: none; }
 .tab-btn {
-  padding: 0.65rem 1rem;
+  flex: 0 0 auto;
+  padding: 0.55rem 1rem;
   border: none;
   background: none;
+  border-radius: 999px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
   color: hsl(var(--muted-foreground));
-  transition: color 0.15s var(--ease), border-color 0.15s var(--ease);
+  transition: color 0.15s var(--ease), background-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
 }
 .tab-btn:hover { color: hsl(var(--foreground)); }
-.tab-btn.active { color: hsl(var(--primary)); border-color: hsl(var(--primary)); }
+.tab-btn.active { color: hsl(var(--foreground)); background: hsl(var(--background)); box-shadow: var(--shadow-sm); }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; animation: pv-fade-in 0.2s var(--ease); }
 
@@ -280,6 +296,56 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
 .btc-price-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; font-size: 0.95rem; }
 .btc-calc-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
 
+/* Donate info rows — Coin / Network / Address / Minimum Deposit, laid out label-left
+   value-right like Gate's own deposit screenshots. */
+.donate-info { margin-top: 1.25rem; text-align: left; }
+.donate-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid hsl(var(--border));
+  font-size: 0.9rem;
+}
+.donate-info-row:last-child { border-bottom: none; }
+.donate-info-row > span { color: hsl(var(--muted-foreground)); flex: 0 0 auto; }
+.donate-info-row > strong { text-align: right; font-weight: 600; }
+.donate-info-address { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+.donate-address-value { display: flex; align-items: center; gap: 0.5rem; }
+.donate-address-value .btc-address { flex: 1; margin-top: 0; }
+.btn-copy { flex: 0 0 auto; min-height: 2.25rem; padding: 0.4rem 0.9rem; font-size: 0.85rem; }
+
+/* Donation warning banner — mirrors Gate's own "match the network" notice */
+.donate-warning {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+  background: hsl(var(--secondary));
+  border-radius: calc(var(--radius) - 0.25rem);
+  font-size: 0.85rem;
+  color: hsl(var(--secondary-foreground));
+  text-align: left;
+}
+.donate-warning span { flex: 0 0 auto; opacity: 0.6; }
+.donate-warning p { margin: 0; }
+
 @media (min-width: 640px) {
   h1 { font-size: 3.5rem; }
+}
+
+/* Mobile refinements — tighter spacing, full-width stacked buttons, nav that never
+   crowds the brand mark off the sticky header. */
+@media (max-width: 640px) {
+  .site-header .bar { height: auto; min-height: 3.5rem; padding: 0.6rem 0; flex-wrap: wrap; row-gap: 0.5rem; }
+  .main-nav { gap: 1rem; width: 100%; justify-content: flex-start; margin-left: 0; }
+  .main-nav a.active::after { bottom: -0.4rem; }
+  .hero { padding: 2rem 0 1.5rem; }
+  .hero-actions .btn { width: 100%; }
+  .card { padding: 1.1rem; }
+  .donate-info-row { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+  .donate-info-row > strong { text-align: left; }
+  .donate-info-address { flex-direction: column; }
 }

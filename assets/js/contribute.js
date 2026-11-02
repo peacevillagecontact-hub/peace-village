@@ -171,6 +171,37 @@ function renderBtcCalculator(container) {
   });
 }
 
+// Copies text to the clipboard (with an execCommand fallback for contexts where the
+// Clipboard API is unavailable), then flashes the button label to confirm the copy.
+function copyToClipboard(text, btn) {
+  const flash = (ok) => {
+    const original = btn.textContent;
+    btn.textContent = ok ? "Copied!" : "Couldn't copy";
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.disabled = false;
+    }, 1500);
+  };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => flash(true), () => flash(false));
+  } else {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      flash(true);
+    } catch (e) {
+      flash(false);
+    }
+    document.body.removeChild(ta);
+  }
+}
+
 function renderDonationOptions() {
   const options = PV.cfg.DONATION_OPTIONS || [];
   const tabsEl = document.getElementById("donate-network-tabs");
@@ -183,9 +214,27 @@ function renderDonationOptions() {
     tabsEl.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.key === opt.key));
     displayEl.innerHTML = `
       <img src="${PV.escapeHtml(opt.qrImage)}" alt="${PV.escapeHtml(opt.label)} donation QR code">
-      <code class="btc-address">${PV.escapeHtml(opt.address)}</code>
-      <p class="form-note">${PV.escapeHtml(opt.note)}</p>
+      <div class="donate-info">
+        <div class="donate-info-row"><span>Coin</span><strong>${PV.escapeHtml(opt.coin)}</strong></div>
+        <div class="donate-info-row"><span>Network</span><strong>${PV.escapeHtml(opt.network)}</strong></div>
+        <div class="donate-info-row donate-info-address">
+          <span>Address</span>
+          <div class="donate-address-value">
+            <code class="btc-address">${PV.escapeHtml(opt.address)}</code>
+            <button type="button" class="btn btn-outline btn-copy" data-address="${PV.escapeHtml(opt.address)}">Copy</button>
+          </div>
+        </div>
+        <div class="donate-info-row"><span>Minimum Deposit</span><strong>${PV.escapeHtml(opt.minDeposit)}</strong></div>
+      </div>
+      <div class="donate-warning">
+        <span aria-hidden="true">ⓘ</span>
+        <p>Please ensure the token and network selected on the sending platform match those on Gate. Sending the wrong coin, or on the wrong network, can result in permanent loss of funds.</p>
+      </div>
     `;
+    const copyBtn = displayEl.querySelector(".btn-copy");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", () => copyToClipboard(copyBtn.dataset.address, copyBtn));
+    }
     if (calcEl) {
       if (opt.key.startsWith("btc")) {
         renderBtcCalculator(calcEl);
