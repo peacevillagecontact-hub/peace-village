@@ -5,13 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Peace Village</title>
 <meta name="description" content="A self-sustaining community where harmony with nature meets modern innovation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container bar">
-    <a href="index.html" class="brand">🕊️ Peace Village</a>
+    <a href="index.html" class="brand"><svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>Peace Village</a>
     <nav class="main-nav">
       <a href="manifesto.html">Manifesto</a>
       <a href="forum.html">Forum</a>
@@ -40,43 +43,61 @@
       <img src="assets/images/hero.jpg" alt="Peace Village — dome homes, gardens, and solar panels">
     </section>
 
+    <section class="hero-gallery">
+      <div class="hero-image">
+        <img src="assets/images/vision-1.jpg" alt="Peace Village — dome homes by the coast at sunset">
+      </div>
+      <div class="hero-image">
+        <img src="assets/images/vision-2.jpg" alt="Peace Village — dome homes with pools and gardens by the sea">
+      </div>
+    </section>
+
     <section>
       <h2 style="text-align:center;margin-top:3rem;">Our Core Values</h2>
       <div class="grid grid-3" style="margin-top:1.5rem;">
         <div class="card">
-          <strong>🌱 Self-Sustaining</strong>
+          <svg class="card-icon icon-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          <strong>Self-Sustaining</strong>
           <p>Powered by solar energy and sustainable practices, living in harmony with nature.</p>
         </div>
         <div class="card">
-          <strong>🏞️ Community-Owned Land</strong>
+          <svg class="card-icon icon-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <strong>Community-Owned Land</strong>
           <p>Collectively owned and managed for shared benefit, ensuring equitable control.</p>
         </div>
         <div class="card">
-          <strong>🏢 Community-Owned Businesses</strong>
+          <svg class="card-icon icon-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <strong>Community-Owned Businesses</strong>
           <p>Cooperative enterprises generating income to expand land and support growth.</p>
         </div>
         <div class="card">
-          <strong>☀️ Solar-Powered Independence</strong>
+          <svg class="card-icon icon-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <strong>Solar-Powered Independence</strong>
           <p>Reliance on renewable solar energy with battery storage for resilience.</p>
         </div>
         <div class="card">
-          <strong>🌾 Self-Sustaining Food Production</strong>
+          <svg class="card-icon icon-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>
+          <strong>Self-Sustaining Food Production</strong>
           <p>Permaculture-based farming and community greenhouses for year-round sustenance.</p>
         </div>
         <div class="card">
-          <strong>💧 Sustainable Water Management</strong>
+          <svg class="card-icon icon-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+          <strong>Sustainable Water Management</strong>
           <p>Access to natural water sources with purification and rainwater harvesting systems.</p>
         </div>
         <div class="card">
-          <strong>♻️ Circular Economy</strong>
+          <svg class="card-icon icon-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.293 13.596 7.196 9.5 3.1 10.598"/><path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/><path d="m13.378 9.633 4.096 1.098 1.097-4.096"/></svg>
+          <strong>Circular Economy</strong>
           <p>Zero-waste systems and composting for a sustainable closed-loop ecosystem.</p>
         </div>
         <div class="card">
-          <strong>🤝 Consensus Governance</strong>
+          <svg class="card-icon icon-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <strong>Consensus Governance</strong>
           <p>No boss, no politicians, no prime ministers. Consensus with the community in circles.</p>
         </div>
         <div class="card">
-          <strong>₿ Transparent Finances</strong>
+          <svg class="card-icon icon-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727"/></svg>
+          <strong>Transparent Finances</strong>
           <p>Open, traceable financial management so every contribution is accountable to the community.</p>
         </div>
       </div>
