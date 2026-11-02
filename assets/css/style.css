@@ -19,6 +19,9 @@
 }
 
 * { box-sizing: border-box; }
+/* The [hidden] attribute must always win over a class's own "display" rule (e.g. .btn's
+   display: inline-flex) — otherwise toggling .hidden = true in JS silently does nothing. */
+[hidden] { display: none !important; }
 
 html, body {
   margin: 0;
