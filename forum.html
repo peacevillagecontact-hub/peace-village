@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forum — Peace Village</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container bar">
+    <a href="index.html" class="brand">🕊️ Peace Village</a>
+    <nav class="main-nav">
+      <a href="manifesto.html">Manifesto</a>
+      <a href="forum.html">Forum</a>
+      <a href="resources.html">Resources</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container" style="max-width:40rem;">
+    <h1 style="font-size:2.25rem;">Community Forum</h1>
+    <p class="lead">Share a thought with the community. Posts appear after a quick review.</p>
+
+    <form id="form-post" class="card" style="margin-bottom:2rem;">
+      <div class="field"><label>Your Name</label>
+        <input type="text" name="guest_name" required></div>
+      <div class="field"><label>Message</label>
+        <textarea name="content" rows="3" required placeholder="Share something with the community..."></textarea></div>
+      <div id="turnstile-post"></div>
+      <div id="alert-post" class="alert"></div>
+      <button type="submit" class="btn btn-primary" style="margin-top:0.5rem;">Post</button>
+    </form>
+
+    <div id="posts">
+      <p class="form-note">Loading posts…</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container"><span>♥ Built with love, light and peace for humanity</span></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/forum.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit" async defer></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+/* Peace Village — shared stylesheet. No build step: plain CSS, edit directly. */
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 84% 5%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --card: 0 0% 100%;
+  --border: 214 32% 91%;
+  --primary: 142 76% 36%;
+  --primary-foreground: 356 100% 97%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+  --destructive: 0 84% 60%;
+  --radius: 0.5rem;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+a { color: inherit; }
+
+.container {
+  width: 100%;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: hsla(var(--background), 0.95);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid hsl(var(--border));
+}
+.site-header .bar {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  gap: 1rem;
+}
+.brand {
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-left: auto;
+}
+.main-nav a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.main-nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.main-nav a.active { color: hsl(var(--primary)); }
+
+/* Main */
+main {
+  flex: 1;
+  width: 100%;
+}
+main .container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid hsl(var(--border));
+  padding: 2.5rem 0;
+}
+.site-footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Typography */
+h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+h2 { font-size: 1.75rem; font-weight: 700; margin-top: 2.5rem; }
+.lead { font-size: 1.15rem; color: hsl(var(--muted-foreground)); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius);
+  padding: 0.65rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-primary { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+.btn-primary:hover { opacity: 0.9; }
+.btn-outline { background: transparent; border-color: hsl(var(--border)); color: hsl(var(--foreground)); }
+.btn-outline:hover { background: hsl(var(--secondary)); }
+
+/* Cards */
+.card {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) + 0.25rem);
+  padding: 1.5rem;
+}
+.grid { display: grid; gap: 1.25rem; }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+/* Hero */
+.hero { text-align: center; padding: 3rem 0; }
+.hero-actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+.hero-image { border-radius: 1rem; overflow: hidden; aspect-ratio: 2/1; margin-top: 3rem; }
+.hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Forms */
+label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.3rem; }
+input[type=text], input[type=email], input[type=tel], input[type=url], textarea, select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  background: hsl(var(--background));
+  font-family: inherit;
+}
+.field { margin-bottom: 1rem; }
+.form-note { font-size: 0.85rem; color: hsl(var(--muted-foreground)); margin-top: 0.25rem; }
+
+/* Tabs (contribute page) */
+.tabs { display: flex; gap: 0.25rem; flex-wrap: wrap; border-bottom: 1px solid hsl(var(--border)); margin-bottom: 1.5rem; }
+.tab-btn {
+  padding: 0.6rem 1rem;
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: hsl(var(--muted-foreground));
+}
+.tab-btn.active { color: hsl(var(--primary)); border-color: hsl(var(--primary)); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Status / alerts */
+.alert {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: none;
+}
+.alert.show { display: block; }
+.alert-success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.alert-error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* Lists (forum / resources) */
+.post {
+  border-bottom: 1px solid hsl(var(--border));
+  padding: 1.25rem 0;
+}
+.post:last-child { border-bottom: none; }
+.post-meta { font-size: 0.8rem; color: hsl(var(--muted-foreground)); margin-top: 0.4rem; }
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+/* Donation */
+.qr-wrap { text-align: center; }
+.qr-wrap img { max-width: 220px; border-radius: 0.5rem; border: 1px solid hsl(var(--border)); }
+.btc-address {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  background: hsl(var(--secondary));
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  word-break: break-all;
+  display: block;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  h1 { font-size: 3.5rem; }
+}
