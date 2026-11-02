@@ -48,5 +48,26 @@ const PV = (() => {
     return input ? input.value : "";
   }
 
-  return { getClient, showAlert, timeAgo, escapeHtml, getTurnstileToken, cfg };
+  // Shows a trailing fade hint on any .tabs-wrap whose inner .tabs strip is actually
+  // scrollable (content wider than the visible strip) — so an overflowing tab reads as
+  // "more to scroll to", not as silently cut off. Re-run on load, resize, and after any
+  // DOM swap that could change tab content (e.g. donate tabs rendered after fetch).
+  function refreshTabOverflow() {
+    document.querySelectorAll(".tabs-wrap").forEach((wrap) => {
+      const tabs = wrap.querySelector(".tabs");
+      if (!tabs) return;
+      const update = () => {
+        const overflowing = tabs.scrollWidth - tabs.clientWidth > 2;
+        const atEnd = tabs.scrollLeft + tabs.clientWidth >= tabs.scrollWidth - 2;
+        wrap.classList.toggle("has-overflow", overflowing && !atEnd);
+      };
+      update();
+      if (!tabs.dataset.pvScrollBound) {
+        tabs.addEventListener("scroll", update);
+        tabs.dataset.pvScrollBound = "1";
+      }
+    });
+  }
+
+  return { getClient, showAlert, timeAgo, escapeHtml, getTurnstileToken, refreshTabOverflow, cfg };
 })();

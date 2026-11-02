@@ -255,4 +255,5 @@ function renderDonationOptions() {
 
   fetchBtcPrice().then(() => show(document.querySelector("#donate-network-tabs .tab-btn.active")?.dataset.key || options[0].key));
   show(options[0].key);
+  PV.refreshTabOverflow();
 }

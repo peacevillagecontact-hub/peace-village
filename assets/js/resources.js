@@ -1,8 +1,13 @@
 // Loads approved contributions (ideas + resources + locations) from the unified view,
-// then filters them client-side by free-text search, type, and time range — no extra
-// network round-trips, since the whole (small, moderation-gated) dataset is already in hand.
-
+// then filters them client-side by free-text search, type, and time range. Rows are
+// fetched a page at a time (not all-at-once) so the page stays fast and light even once
+// there are hundreds of approved entries — "Load more" pulls the next page from Supabase
+// on demand; filtering only ever runs over the pages already fetched into ALL_ITEMS.
+const PAGE_SIZE = 30;
 let ALL_ITEMS = [];
+let nextOffset = 0;
+let reachedEnd = false;
+let isLoadingPage = false;
 
 function renderItems(items) {
   const container = document.getElementById("resource-list");
@@ -53,6 +58,41 @@ function applyFilters() {
   renderItems(filtered);
 }
 
+function updateLoadMoreButton() {
+  const btn = document.getElementById("load-more-btn");
+  if (!btn) return;
+  btn.hidden = reachedEnd;
+  btn.disabled = isLoadingPage;
+  btn.textContent = isLoadingPage ? "Loading…" : "Load more";
+}
+
+async function loadNextPage() {
+  if (isLoadingPage || reachedEnd) return;
+  isLoadingPage = true;
+  updateLoadMoreButton();
+
+  const client = PV.getClient();
+  const { data, error } = await client
+    .from("contributions_view")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .range(nextOffset, nextOffset + PAGE_SIZE - 1);
+
+  isLoadingPage = false;
+  if (error) {
+    PV.showAlert(document.getElementById("resource-load-alert"), "Could not load more resources: " + error.message, "error");
+    updateLoadMoreButton();
+    return;
+  }
+
+  const page = data || [];
+  ALL_ITEMS = ALL_ITEMS.concat(page);
+  nextOffset += page.length;
+  if (page.length < PAGE_SIZE) reachedEnd = true;
+  applyFilters();
+  updateLoadMoreButton();
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("resource-list");
   const client = PV.getClient();
@@ -61,26 +101,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  const { data, error } = await client
-    .from("contributions_view")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(100);
+  await loadNextPage();
 
-  if (error) {
-    container.innerHTML = '<p class="form-note">Could not load resources: ' + PV.escapeHtml(error.message) + "</p>";
-    return;
-  }
-
-  ALL_ITEMS = data || [];
   if (ALL_ITEMS.length === 0) {
     container.innerHTML = '<p class="form-note">Nothing here yet — be the first to contribute.</p>';
     return;
   }
 
-  renderItems(ALL_ITEMS);
-
   document.getElementById("filter-search").addEventListener("input", applyFilters);
   document.getElementById("filter-type").addEventListener("change", applyFilters);
   document.getElementById("filter-time").addEventListener("change", applyFilters);
+  const loadMoreBtn = document.getElementById("load-more-btn");
+  if (loadMoreBtn) loadMoreBtn.addEventListener("click", loadNextPage);
 });

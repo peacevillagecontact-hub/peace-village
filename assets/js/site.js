@@ -13,4 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (toggle && nav) {
     toggle.addEventListener("click", () => nav.classList.toggle("open"));
   }
+
+  PV.refreshTabOverflow();
+  window.addEventListener("resize", PV.refreshTabOverflow);
 });

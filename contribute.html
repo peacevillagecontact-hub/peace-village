@@ -22,16 +22,18 @@
 </header>
 
 <main>
-  <div class="container" style="max-width:40rem;">
+  <div class="container" style="max-width:46rem;">
     <h1 style="font-size:2.25rem;">Contribute to Our Vision</h1>
     <p class="lead">Every submission is reviewed before it appears publicly.</p>
 
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="idea">💡 Share Idea</button>
-      <button class="tab-btn" data-tab="resource">🏠 Add Resource</button>
-      <button class="tab-btn" data-tab="connect">❤️ Connect</button>
-      <button class="tab-btn" data-tab="location">📍 Suggest Location</button>
-      <button class="tab-btn" data-tab="donate">💰 Donate</button>
+    <div class="tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="idea">💡 Share Idea</button>
+        <button class="tab-btn" data-tab="resource">🏠 Add Resource</button>
+        <button class="tab-btn" data-tab="connect">❤️ Connect</button>
+        <button class="tab-btn" data-tab="location">📍 Suggest Location</button>
+        <button class="tab-btn" data-tab="donate">💰 Donate</button>
+      </div>
     </div>
 
     <!-- Share Idea -->
@@ -119,7 +121,7 @@
       <div class="card">
         <h3 style="margin-top:0;">Donate</h3>
         <p>Our community runs on voluntary contributions. Every donation directly supports land, tools, and shared infrastructure. Pick a network below — each QR code and address is static (no payment processor, no fees to us beyond the network's own).</p>
-        <div class="tabs" id="donate-network-tabs" role="tablist" aria-label="Donation network"></div>
+        <div class="tabs-wrap"><div class="tabs" id="donate-network-tabs" role="tablist" aria-label="Donation network"></div></div>
         <div class="qr-wrap" id="donate-display"></div>
         <div id="btc-calculator" class="btc-calculator" hidden></div>
       </div>
