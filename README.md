@@ -41,6 +41,12 @@ That's it — no admin panel to build or maintain.
 Edit any `.html`/`.css`/`.js` file directly (they're plain text, no build/compile step), commit, and push
 to `main` — GitHub Pages redeploys automatically within a minute or two.
 
+## Security
+
+See `SECURITY.md` in this repo for a detailed breakdown of every security control applied
+(RLS policies, anti-spam, XSS prevention, secrets handling, HTTPS) and the one known gap
+(no server-side Turnstile verification, since there's no backend) — plus how it's mitigated.
+
 ## What changed from the old Vercel/Next.js site
 
 See the project's `manual.md` (in the Claude Project "Website Development - Peace Village") for the
