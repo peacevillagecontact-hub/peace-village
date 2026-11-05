@@ -21,6 +21,36 @@ Status column: ✅ applied in code/config now · ⏳ needs a one-time manual ste
 | `contributions_view` uses `security invoker` | ✅ | Without this, a Postgres view runs with the *view owner's* privileges, which would silently bypass the underlying tables' RLS and leak pending rows. `security invoker` forces the view to respect the querying role's own RLS, so it only ever surfaces what `anon` is already allowed to see. |
 | `anon` key safe to publish | ✅ (by design) | Supabase's security model is RLS-based, not key-secrecy-based. The anon/public key is meant to be embedded in client-side code (see `assets/js/config.js`) — it identifies the `anon` Postgres role, and that role's actual permissions are entirely defined by the RLS policies above. Committing it to a public GitHub repo is standard practice and does **not** weaken security, provided RLS stays correctly configured (which is the actual security boundary). |
 | `service_role` key never used client-side | ✅ | This key bypasses RLS entirely and must never appear in any file under `assets/` or be committed. It isn't used anywhere in this static site — there is no backend to hold it. |
+| `SECURITY DEFINER` functions not directly callable via public RPC | ✅ (fixed session 10) | See §1a below. |
+
+### 1a. `SECURITY DEFINER` function privileges
+
+Two functions in this project run as `SECURITY DEFINER` (they need elevated privileges to do their
+job): `notify_new_entry()` (an `AFTER INSERT` trigger that fires the new-submission email webhook —
+§ above, "New-submission alerts" in `manual.md`) and `rls_auto_enable()` (a DDL event trigger that
+auto-enables RLS on any newly created table, as a defense-in-depth backstop against forgetting it).
+
+Running the Supabase security advisor (`get_advisors`, type `security`) on 2026-11-05 (session 10)
+flagged both: Postgres grants `EXECUTE` on a new function to the `PUBLIC` pseudo-role by default, and
+the `anon`/`authenticated` roles inherit that through PUBLIC membership — so both functions were
+directly callable by any anonymous client via `POST /rest/v1/rpc/notify_new_entry` /
+`.../rpc/rls_auto_enable`, even though neither is meant to be invoked that way (both only ever run as
+triggers, which is a separate internal mechanism from role-based RPC calls). In practice this was a
+low-severity issue — `rls_auto_enable()` takes no useful input and only acts on DDL events, not RPC
+calls, and `notify_new_entry()` ignores any arguments an RPC caller could supply — but there was no
+reason to leave an unnecessary public entry point open.
+
+**Fix** (two migrations, since the first attempt was incomplete — see each file's own comments):
+1. `supabase/migrations/20261105163040_lock_down_security_definer_functions.sql` — revoked `EXECUTE`
+   from `anon, authenticated` directly. This alone did **not** clear the advisor warning, because the
+   implicit `PUBLIC` grant (see above) was still in effect.
+2. `supabase/migrations/20261105163213_lock_down_security_definer_functions_v2.sql` — revoked
+   `EXECUTE` from `PUBLIC` as well, which closed the gap.
+
+**Verified after the fix**: `get_advisors(type: "security")` returned `{"lints":[]}` — no remaining
+findings. A live test insert into `ideas` still triggered `notify_new_entry()` successfully (confirmed
+via `net._http_response`), since trigger invocation doesn't go through the revoked RPC path — so the
+new-submission email alerts are unaffected.
 
 ## 2. Anti-spam / anti-bot
 
@@ -102,3 +132,4 @@ submissions and approve/reject.
 - **Someone trying to read other people's contact-form messages**: blocked at the database level (§1) — there is no policy that permits it, regardless of what key or client is used.
 - **Someone submitting an XSS payload as their name/bio/post content**: neutralized on render by `escapeHtml()` (§3), and never shown publicly anyway unless approved (§1).
 - **Someone bypassing Turnstile by calling the Supabase REST API directly**: not currently prevented (§2, the one open gap) — but contained by moderation (§1), since nothing reaches the public site without manual approval.
+- **Someone calling an internal trigger function directly via public RPC**: closed in session 10 (§1a) — `notify_new_entry()` and `rls_auto_enable()` are no longer executable by `anon`/`authenticated`/`PUBLIC`, only by their own trigger mechanisms.
