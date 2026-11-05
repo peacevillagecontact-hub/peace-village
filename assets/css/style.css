@@ -198,6 +198,37 @@ h3 { letter-spacing: -0.01em; }
 .vision-gallery figure { margin: 0; border-radius: 1rem; overflow: hidden; aspect-ratio: 3/2; }
 .vision-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+/* Start Here — numbered step path for a complete beginner */
+.step-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+.step-card { display: flex; gap: 1.1rem; align-items: flex-start; }
+.step-num {
+  flex: 0 0 auto;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.step-body { flex: 1 1 auto; min-width: 0; }
+.step-body h3 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+.step-body p { margin: 0 0 0.75rem; font-size: 0.95rem; color: hsl(var(--muted-foreground)); }
+.step-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; font-size: 0.88rem; }
+.step-links a { font-weight: 600; }
+.step-section-label {
+  margin: 2.25rem 0 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+.step-section-label:first-child { margin-top: 1rem; }
+
 /* Forms */
 label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; }
 input[type=text], input[type=email], input[type=tel], input[type=url], input[type=number], textarea, select {

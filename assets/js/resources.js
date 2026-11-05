@@ -113,4 +113,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("filter-time").addEventListener("change", applyFilters);
   const loadMoreBtn = document.getElementById("load-more-btn");
   if (loadMoreBtn) loadMoreBtn.addEventListener("click", loadNextPage);
+
+  // A link elsewhere on the site (e.g. the Start Here guide) can deep-link into a topic
+  // with ?q=search+term. Load every page first so the filter has everything to search
+  // over, not just the first batch — otherwise a topic that only exists on page 2+ would
+  // silently show "no matches" until someone clicked Load more themselves.
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get("q");
+  if (q) {
+    while (!reachedEnd) {
+      // eslint-disable-next-line no-await-in-loop
+      await loadNextPage();
+    }
+    document.getElementById("filter-search").value = q;
+    applyFilters();
+    container.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 });
