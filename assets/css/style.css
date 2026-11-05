@@ -244,7 +244,24 @@ input[type=text], input[type=email], input[type=tel], input[type=url], input[typ
 }
 input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0.4); }
 .field { margin-bottom: 1.1rem; }
+.field-row { display: flex; gap: 1rem; }
+.field-row .field { flex: 1 1 0; }
 .form-note { font-size: 0.85rem; color: hsl(var(--muted-foreground)); margin-top: 0.3rem; }
+.form-note a { font-weight: 600; }
+
+/* Map page */
+#map {
+  height: 480px;
+  width: 100%;
+  margin-top: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--muted));
+}
+.leaflet-popup-content-wrapper { border-radius: var(--radius); }
+.map-popup h3 { margin: 0 0 0.35rem; font-size: 1rem; }
+.map-popup p { margin: 0 0 0.4rem; font-size: 0.88rem; }
+.map-popup .badge { margin-right: 0.25rem; }
 
 /* Load more (resources / forum pagination) */
 .load-more-wrap { display: flex; justify-content: center; margin-top: 1.75rem; }

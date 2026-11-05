@@ -532,3 +532,23 @@ insert into public.forum_posts (content, guest_name, status) values
 
 ('STARTING FROM ZERO — Staying Online Off-Grid: Starlink, a cell booster, or nothing at all by choice? If you have real numbers (actual speeds, monthly cost, how often it drops in bad weather), share them — this is one area where the gap between marketing and reality seems largest.',
  'admin','approved');
+
+-- ============================= LOCATIONS (Map page examples) =============================
+-- Two real, verifiable example locations so the new Map page is not empty on launch.
+-- Coordinates sourced from Wikipedia (Twin Oaks' own infobox; OSE's Factor e Farm from a
+-- citation in its article) — not estimated or invented. See migration
+-- 20261105164322_add_location_coordinates.sql for the latitude/longitude columns.
+
+insert into public.locations (name, address, description, tags, guest_name, status, latitude, longitude) values
+
+('Twin Oaks Community',
+ 'Louisa, Virginia, USA',
+ 'A real intentional community founded in 1967, inspired by B.F. Skinner''s novel Walden Two — income-sharing, consensus-based decision-making, and shared labor, still running today. Referenced in this site''s Community Models resources. Coordinates from the community''s own Wikipedia infobox.',
+ array['intentional-community','walden-two','example-location'],
+ 'admin','approved', 37.932500, -77.991667),
+
+('Open Source Ecology — Factor e Farm',
+ 'Near Maysville, Missouri, USA',
+ 'The working farm and fabrication site of Open Source Ecology, the project publishing free, open-source blueprints for the machines a self-sufficient village needs (the "Global Village Construction Set"). Referenced in this site''s Building a Village resources. Coordinates taken from a citation in the organization''s Wikipedia article (approximate — rural site, not a street address).',
+ array['open-source','village-building','example-location'],
+ 'admin','approved', 39.863900, -94.375000);

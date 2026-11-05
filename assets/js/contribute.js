@@ -27,6 +27,16 @@ function tagsToArray(str) {
     .filter(Boolean);
 }
 
+// Coordinates are optional and free-text — returns a finite number in range, or null for
+// blank/unparseable input, rather than letting a stray value reach the database (which has
+// its own range check as a backstop, but failing there would surface a raw SQL error).
+function parseCoord(str, min, max) {
+  if (str === null || str === undefined || String(str).trim() === "") return null;
+  const n = parseFloat(str);
+  if (!Number.isFinite(n) || n < min || n > max) return null;
+  return n;
+}
+
 async function handleSubmit(formId, alertId, table, buildRow, turnstileKey) {
   const form = document.getElementById(formId);
   if (!form) return;
@@ -110,6 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
     description: d.get("description"),
     image_url: d.get("image_url") || null,
     guest_name: d.get("guest_name"),
+    latitude: parseCoord(d.get("latitude"), -90, 90),
+    longitude: parseCoord(d.get("longitude"), -180, 180),
   }), "location");
 
   // Static multi-chain donation info (BTC + USDT on TRC20/Arbitrum One/SOL).

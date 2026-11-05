@@ -19,6 +19,7 @@
       <a href="manifesto.html">Manifesto</a>
       <a href="forum.html">Forum</a>
       <a href="resources.html">Resources</a>
+      <a href="map.html">Map</a>
       <a href="contribute.html">Contribute</a>
       <a href="about.html">About</a>
     </nav>
@@ -114,6 +115,13 @@
           <textarea name="description" rows="4" required></textarea></div>
         <div class="field"><label>Image URL (optional)</label>
           <input type="url" name="image_url" placeholder="https://..."></div>
+        <div class="field-row">
+          <div class="field"><label>Latitude (optional)</label>
+            <input type="text" name="latitude" placeholder="e.g. 37.9325" inputmode="decimal"></div>
+          <div class="field"><label>Longitude (optional)</label>
+            <input type="text" name="longitude" placeholder="e.g. -77.9917" inputmode="decimal"></div>
+        </div>
+        <p class="form-note">Add coordinates if you want this pinned on the <a href="map.html">Map</a> — search the address on a maps site, right-click the spot, and copy the coordinates it shows. Leave blank if you're not sure; the location will still be listed once approved.</p>
         <div id="turnstile-location"></div>
         <div id="alert-location" class="alert"></div>
         <button type="submit" class="btn btn-primary" style="margin-top:0.5rem;">Submit Location</button>
