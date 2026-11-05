@@ -210,6 +210,130 @@ insert into public.resources (title, category, description, tags, location, link
  array['gravity-fed','ram-pump','spring-water','DIY'],
  null,
  'https://www.motherearthnews.com/homesteading-and-livestock/how-to-build-a-water-pump-zmaz96amzgoe/',
+ 'admin','approved'),
+
+-- 13. Food Preservation & Cold Storage (no fridge needed) — added session 10
+('A Root Cellar: Cold Storage That Needs No Electricity',
+ 'Food Preservation & Cold Storage',
+ 'Before refrigerators, people kept food cold using the ground itself — the earth a few feet down stays naturally cool and humid year-round. A root cellar (a basement corner, a buried barrel, or a dug-out room) uses that fact to store potatoes, carrots, apples, and canned goods for months with zero power. If you are picturing off-grid life and wondering "how do I keep food cold without a fridge," this is the real, centuries-old answer, with practical build instructions.',
+ array['food-preservation','cold-storage','root-cellar','no-fridge','starting-from-zero'],
+ null,
+ 'https://www.motherearthnews.com/diy/build-a-basement-root-cellar-zmaz04djzsel/',
+ 'admin','approved'),
+
+('Preserving Food Without a Freezer or Fridge: The Other Methods',
+ 'Food Preservation & Cold Storage',
+ 'A root cellar works for some foods, but not all of them — meat, dairy, and many vegetables need a different approach. This covers the other traditional preservation methods that do not need electricity: canning (water-bath and pressure), fermenting (sauerkraut, pickles), drying/dehydrating, and smoking. Between this and a root cellar, you can realistically eat well through a winter with no fridge at all.',
+ array['food-preservation','canning','fermenting','no-fridge'],
+ null,
+ 'https://insteading.com/blog/preserving-food-without-freezing-or-canning/',
+ 'admin','approved'),
+
+-- 14. Off-Grid Heating & Cooking — added session 10
+('The Rocket Mass Heater: Serious Heat From a Small Amount of Wood',
+ 'Off-Grid Heating & Cooking',
+ 'A rocket mass heater burns wood very efficiently in a small firebox, then runs the hot exhaust through a mass of earth or masonry (often a bench you can sit or lie on) that slowly radiates heat for hours after the fire is out. For someone who has never heated with anything but a thermostat, this is the off-grid answer to "how do I stay warm in winter without burning through a forest" — a fraction of the firewood of an open fireplace for the same warmth.',
+ array['heating','rocket-mass-heater','wood-heat','starting-from-zero'],
+ null,
+ 'https://naturalbuildingblog.com/rocket-mass-heater-builders-guide-kickstarter/',
+ 'admin','approved'),
+
+('Solar Cooking: Cooking a Real Meal With Nothing but Sunlight',
+ 'Off-Grid Heating & Cooking',
+ 'A solar cooker (a simple box or parabolic reflector) concentrates sunlight enough to bake, boil, or slow-cook food without any fuel or electricity at all — genuinely useful on sunny days and a good backup for your main cooking method. Low Impact is a long-running UK sustainability education organization; this collects their practical solar-cooking guidance.',
+ array['cooking','solar-cooker','off-grid','starting-from-zero'],
+ null,
+ 'https://www.lowimpact.org/posts/tag/solar-cooking/',
+ 'admin','approved'),
+
+-- 15. Waste Management & Composting Toilets — added session 10
+('Composting Toilets: Where Your Waste Actually Goes When There Is No Sewer',
+ 'Waste Management',
+ 'If you have only ever used a flush toilet connected to a city sewer, "no sewer" sounds like a dealbreaker — it is not. A composting toilet separates liquid and solid waste and lets the solids break down aerobically (with the help of sawdust or coconut coir) into safe, usable compost, with no smell when run correctly and no water or septic system needed at all. This walks through how one actually works and how to build or install one.',
+ array['waste-management','composting-toilet','sanitation','starting-from-zero'],
+ null,
+ 'https://www.greenmatters.com/p/how-to-build-a-compost-toilet',
+ 'admin','approved'),
+
+('Greywater: Reusing Your Sink and Shower Water Instead of Wasting It',
+ 'Waste Management',
+ '"Greywater" is the relatively clean wastewater from sinks, showers, and laundry (as opposed to "blackwater" from toilets) — and off-grid, it is valuable rather than waste, since it can be filtered and redirected straight to irrigate fruit trees and gardens instead of going into a septic field or down a drain. A practical introduction from an established off-grid living publication.',
+ array['waste-management','greywater','water-reuse','starting-from-zero'],
+ null,
+ 'https://off-grid.net/going-grey-water-that-is',
+ 'admin','approved'),
+
+-- 16. Off-Grid Health & First Aid — added session 10
+('Wilderness & Remote First Aid: The Official Course Most People Have Never Heard Of',
+ 'Off-Grid Health & First Aid',
+ 'Regular first aid assumes an ambulance is 10 minutes away. Off-grid, it might not be — help could be hours away, which changes what you actually need to know (when to improvise a splint and keep going vs. when an injury means you need to get out immediately). The American Red Cross runs an official "Wilderness and Remote First Aid" course and reference guide built exactly for this gap; it is a paid course/manual, not a free page, but it is the real, standard curriculum, not improvised advice.',
+ array['first-aid','health','emergency','starting-from-zero'],
+ null,
+ 'https://www.redcross.org/store/wilderness-and-remote-first-aid-emergency-reference-guide-and-pocket-guide-rev-9-14/656237.html',
+ 'admin','approved'),
+
+('What Wilderness First Aid Actually Covers (A Free Overview)',
+ 'Off-Grid Health & First Aid',
+ 'A readable, free overview of what a wilderness-first-aid course actually teaches — the kinds of injuries and situations it covers, and why it differs from a standard city first-aid class — useful for deciding whether (and when) to take the real course above.',
+ array['first-aid','health','emergency','overview'],
+ null,
+ 'https://greatdaysoutdoors.com/wilderness-first-aid/',
+ 'admin','approved'),
+
+-- 17. Off-Grid Communication & Safety — added session 10
+('Off-Grid Radio: How to Stay Reachable When There Is No Cell Signal',
+ 'Off-Grid Communication & Safety',
+ 'Many off-grid locations have no cell coverage at all. This is a clear starting point from a well-known independent off-grid/amateur-radio educator on what a basic radio setup for an off-grid property actually looks like, and the real difference between unlicensed options (GMRS) and amateur/"ham" radio (which needs a license but reaches much further).',
+ array['communication','radio','safety','starting-from-zero'],
+ null,
+ 'https://oh8stn.org/blog/2023/02/20/starting-point-off-grid-survival-radio/',
+ 'admin','approved'),
+
+('Amateur (Ham) Radio for Beginners',
+ 'Off-Grid Communication & Safety',
+ 'A beginner-oriented walkthrough of how amateur radio licensing and equipment actually works, for anyone whose off-grid plan needs a reliable way to reach the outside world (or other community members) when there is no phone signal and the internet is not an option.',
+ array['communication','ham-radio','safety'],
+ null,
+ 'https://theprepperjournal.com/2021/06/04/amateur-radio-beginners-guide/',
+ 'admin','approved'),
+
+-- 18. Everyday Off-Grid Skills — added session 10
+('101 Basic Homesteading Skills',
+ 'Everyday Off-Grid Skills',
+ 'A long, genuinely practical list from an established homesteading magazine of the hands-on skills that off-grid life actually runs on day to day — sharpening a knife or axe properly, tying the handful of knots that matter, lighting a fire reliably in bad weather, basic tool maintenance, and more. If you are starting from literally zero practical experience, this is the realistic list of what to start learning first, in roughly the order it will matter.',
+ array['basic-skills','tools','fire','starting-from-zero'],
+ null,
+ 'https://www.motherearthnews.com/homesteading-and-livestock/basic-homesteading-skills-zb0z1302zpit/',
+ 'admin','approved'),
+
+('More Basic Homesteading Skills, With Specifics',
+ 'Everyday Off-Grid Skills',
+ 'A second, complementary skills list that goes deeper on a few essentials the first list only touches on — knife and tool care, basic food-safe preservation habits, and simple repairs — from an established homesteading publication.',
+ array['basic-skills','tools','homesteading'],
+ null,
+ 'https://morningchores.com/basic-homesteading-skills/',
+ 'admin','approved');
+
+-- ============================= FORUM SEED POSTS — session 10 additions =============================
+
+insert into public.forum_posts (content, guest_name, status) values
+
+('STARTING FROM ZERO — Food Storage Without a Fridge: A root cellar handles roots and canned goods; canning, fermenting, drying, and smoking handle the rest. If you live without a fridge (or part-time without one), what is actually in your rotation — what spoils fastest, and what keeps for months with no trouble at all?',
+ 'admin','approved'),
+
+('STARTING FROM ZERO — Heating & Cooking: Rocket mass heaters and solar cookers both promise a lot on paper. If you have actually heated a home with one or cooked a full meal with sunlight alone, what is the real day-to-day experience — how much wood do you really burn per winter, and how many days a year is a solar cooker actually usable where you live?',
+ 'admin','approved'),
+
+('STARTING FROM ZERO — Waste & Water Reuse: Composting toilets and greywater systems are the two things that scare city people most about going off-grid, and usually turn out to be the easiest part once you actually try them. If you run either one, what do you wish someone had told you on day one — the smell question, the maintenance routine, what actually goes wrong?',
+ 'admin','approved'),
+
+('Off-Grid Health & First Aid — If help is genuinely hours away rather than minutes, what is actually in your first-aid kit and skill set? Wilderness-specific training (splinting, extraction decisions, treating in place vs. evacuating) is different from a standard city first-aid class — who here has taken a real wilderness-first-aid course, and was it worth it?',
+ 'admin','approved'),
+
+('STARTING FROM ZERO — Communication When There Is No Signal: If your land has no cell coverage, what do you actually use to stay reachable — GMRS, ham radio, satellite messenger, something else? Real range and reliability numbers from your own setup would help a lot of people deciding what to buy first.',
+ 'admin','approved'),
+
+('STARTING FROM ZERO — Everyday Skills: For someone who has genuinely never sharpened a knife, tied a real knot, or lit a fire in the rain, what is the realistic order to learn these in, and which ones turned out to matter far more in practice than you expected before you moved off-grid?',
  'admin','approved');
 
 -- ============================= FORUM SEED POSTS =============================
