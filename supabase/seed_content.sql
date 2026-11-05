@@ -375,3 +375,160 @@ insert into public.forum_posts (content, guest_name, status) values
 
 ('Dağın Tepesinde Su Kaynağından Su Çekme Sistemi / Gravity-Fed Spring Systems — If your land has a spring or stream above your house site, a gravity-fed system (or a ram pump if the drop is not quite enough) can give you running water with zero electricity. Has anyone here actually built one? Real numbers on elevation drop, pipe size, and winter freeze problems would help a lot of people planning the same thing.',
  'admin','approved');
+
+-- ============================= RESOURCES — session 10 round 2 (content depth + 5 new topics) =============================
+
+insert into public.resources (title, category, description, tags, location, link, guest_name, status) values
+
+-- New category: Animal Husbandry Basics
+('Raising Backyard Chickens: A Real Beginner''s Guide',
+ 'Animal Husbandry Basics',
+ 'Chickens are usually the first animal people add to an off-grid property — they need less space and infrastructure than larger livestock, and give eggs within months. This covers coop basics, predator protection, feed, and the real day-to-day time commitment, from an established pet-care company''s education section.',
+ array['animal-husbandry','chickens','starting-from-zero'],
+ null,
+ 'https://www.chewy.com/education/farm-animal/chicken/how-to-raise-backyard-chickens-a-beginners-guide',
+ 'admin','approved'),
+
+('Raising Goats for Beginners',
+ 'Animal Husbandry Basics',
+ 'Goats are a common next step after chickens for anyone wanting milk, meat, or land-clearing help — but they need secure fencing (goats are notorious escape artists), shelter, and a real understanding of their diet before you bring one home. A practical first-timer''s overview from an established homesteading blog.',
+ array['animal-husbandry','goats','dairy','starting-from-zero'],
+ null,
+ 'https://simplelivingcountrygal.com/?p=23478',
+ 'admin','approved'),
+
+-- New category: Seed Starting & Climate-Appropriate Growing
+('Find Your Climate Zone Before You Plant Anything',
+ 'Seed Starting & Climate-Appropriate Growing',
+ 'What grows well in one place can fail completely a few hundred kilometers away — the USDA Plant Hardiness Zone Map (and equivalents elsewhere) is the standard way to check what your climate can actually support before you buy seeds. From Ohio State University''s climate office; even outside the US, understanding how these zone systems work helps you find your own country''s equivalent.',
+ array['growing-food','climate-zone','starting-from-zero'],
+ null,
+ 'https://climate.osu.edu/news/plant-hardiness-zone-map',
+ 'admin','approved'),
+
+('When to Actually Start Your Seeds',
+ 'Seed Starting & Climate-Appropriate Growing',
+ 'Starting seeds too early or too late is one of the most common first-year mistakes — this walks through counting back from your last expected frost date to find the right indoor start time for your specific zone, from a long-established general gardening reference.',
+ array['growing-food','seed-starting','starting-from-zero'],
+ null,
+ 'https://www.gardeningknowhow.com/garden-how-to/propagation/seeds/when-to-start-seeds.htm',
+ 'admin','approved'),
+
+-- New category: Barter & Local Economy
+('Starting a Community Currency or Barter System',
+ 'Barter & Local Economy',
+ 'If a community wants to trade skills and goods without everything running through official money, this covers how local currency and barter systems have actually been set up by other communities — the practical mechanics, not just the idea. From an established homesteading/self-reliance magazine.',
+ array['local-economy','barter','community'],
+ null,
+ 'https://www.motherearthnews.com/nature-and-environment/community-currency-system-zmaz93onztak',
+ 'admin','approved'),
+
+('How to Launch a Time Bank',
+ 'Barter & Local Economy',
+ 'A time bank lets people trade hours of help (an hour of your labor equals an hour of anyone else''s, regardless of the task) instead of money — a real alternative-economy model several neighborhoods and communities already run. An official how-to toolkit from a US city government.',
+ array['local-economy','time-banking','community'],
+ null,
+ 'https://www.stlouis-mo.gov/government/departments/planning/sustainability/toolkit/time-bank.cfm',
+ 'admin','approved'),
+
+-- New category: Legal & Zoning Basics (not legal advice — jurisdiction-dependent, see description)
+('Is Off-Grid Living Actually Legal Where You Are? (It Depends Entirely on Location)',
+ 'Legal & Zoning Basics',
+ 'This is not legal advice, and there is no single answer — off-grid legality depends on your specific country, state/province, and even county: some places ban living with no septic/sewer connection outright, others welcome it, and most have rules buried in building codes that have nothing to do with "off-grid" by name. A real community discussion collecting what people have actually run into, county by county, as a starting point for your own research — not a substitute for checking your specific jurisdiction yourself.',
+ array['legal','zoning','starting-from-zero'],
+ null,
+ 'https://permies.com/t/152283/Information-resources-grid-legality-request',
+ 'admin','approved'),
+
+('What "Off-Grid" Means Legally, in Plain Terms',
+ 'Legal & Zoning Basics',
+ 'A general-audience overview of the legal and practical distinctions that actually matter — off-grid utilities vs. off-grid land title vs. off-grid as a lifestyle choice — from a land-sales company''s educational content. Treat it as a starting vocabulary, then verify everything against your own local authority.',
+ array['legal','zoning','overview'],
+ null,
+ 'https://www.landhub.com/land-news/what-is-off-the-grid-living',
+ 'admin','approved'),
+
+-- New category: Off-Grid Internet & Digital Access
+('Starlink: The Real-World Review',
+ 'Off-Grid Internet & Digital Access',
+ 'Satellite internet (most commonly Starlink) is what makes genuine off-grid internet access realistic today, where a decade ago it was not. An independent tech publication''s hands-on review of real speeds, latency, and the honest limitations (weather sensitivity, line-of-sight to open sky needed).',
+ array['communication','internet','starlink','starting-from-zero'],
+ null,
+ 'https://www.techradar.com/pro/starlink-review',
+ 'admin','approved'),
+
+('Cell Booster vs. Satellite Internet: Which Do You Actually Need?',
+ 'Off-Grid Internet & Digital Access',
+ 'If your land has even a weak cell signal, a cellular signal booster can be far cheaper and simpler than satellite internet — but if there is no signal at all, boosting zero signal gets you zero. A direct comparison from an established signal-booster manufacturer (vendor-published, but a fair side-by-side of when each option actually makes sense).',
+ array['communication','internet','cell-booster'],
+ null,
+ 'https://www.weboost.com/blog/cell-signal-booster-vs-satellite-internet-who-comes-out-on-top',
+ 'admin','approved'),
+
+-- Depth additions to existing categories
+('More Real Experiences Buying Land (permies.com)',
+ 'Land & Location',
+ 'A second long-running permies.com thread on finding and buying land, with a different set of real buyer experiences and pitfalls than the first — worth reading both since no two land searches run into the same problems.',
+ array['land','community-knowledge','starting-from-zero'],
+ null,
+ 'https://permies.com/t/138954/wannabe-finding-buying-land',
+ 'admin','approved'),
+
+('How an Off-Grid Solar System Actually Works, Step by Step',
+ 'Solar Energy',
+ 'A visual, step-by-step walkthrough of what actually happens inside an off-grid solar system from sunrise to a device being charged — useful for understanding the wiring and sequence before getting into sizing math, from an established solar retailer''s technical blog.',
+ array['solar','off-grid','how-it-works'],
+ null,
+ 'https://thesolarstore.com/blogs/news/how-an-off-grid-solar-system-works',
+ 'admin','approved'),
+
+('Off-Grid Water: A Broader Overview',
+ 'Off-Grid Water Systems',
+ 'A second, broader overview of off-grid water sourcing that covers some ground the Mother Earth News comparison does not — useful as a cross-check before settling on one approach for your land.',
+ array['water-systems','off-grid','overview'],
+ null,
+ 'https://insteading.com/blog/off-grid-water-system/',
+ 'admin','approved'),
+
+('Earthbag Building in 8 Steps (From the Dedicated Earthbag Site)',
+ 'Natural Building',
+ 'The most specialized earthbag-building website on the internet, written by people who have built this way for decades, breaking the technique down into 8 concrete steps — a good primary-source complement to the Wikipedia overview and the Instructables build log.',
+ array['natural-building','earthbag','how-to'],
+ null,
+ 'https://earthbagbuilding.com/articles/8steps.htm',
+ 'admin','approved'),
+
+('Beneficial Insects That Live in Your Soil, Not Just on Your Plants',
+ 'No-Pesticide Permaculture',
+ 'Most beginner pest-control advice focuses on the insects you can see on leaves — this USDA-funded SARE guide instead covers the beneficial insects that live and hunt in the soil itself, an easy-to-miss half of a genuinely pesticide-free system.',
+ array['permaculture','pest-control','beneficial-insects','soil'],
+ null,
+ 'https://projects.sare.org/information-product/beneficial-insects-for-natural-pest-control-soil-scouting-2/',
+ 'admin','approved'),
+
+('How to Actually Create a Home Food Forest',
+ 'Food Forests',
+ 'A third, more execution-focused guide on building a food forest at home — useful once you understand the seven-layer concept and are ready for the practical sequence of what to plant first and how to space it, from an established vegetable-gardening reference site.',
+ array['food-forest','permaculture','how-to'],
+ null,
+ 'https://harvesttotable.com/how-to-create-home-garden-food-forest/',
+ 'admin','approved');
+
+-- ============================= FORUM SEED POSTS — session 10 round 2 =============================
+
+insert into public.forum_posts (content, guest_name, status) values
+
+('STARTING FROM ZERO — Animal Husbandry: Chickens or goats first? If you keep either, what has the real day-to-day time cost been (not the Instagram version), and what would you tell someone who has never kept an animal before they bring one home?',
+ 'admin','approved'),
+
+('STARTING FROM ZERO — What Actually Grows Where You Are: Climate zones are a starting point, not the full picture — microclimates, soil, and elevation all matter too. What has actually thrived (or failed) on your land, and what zone/region are you in? Real local results help far more than a generic chart.',
+ 'admin','approved'),
+
+('Barter & Local Economy — Has anyone here actually run a time bank or barter system with their community, even informally? What broke down first — tracking fairness, people not following through, something else — and what would you set up differently next time?',
+ 'admin','approved'),
+
+('Legal & Zoning Basics — This is exactly the kind of thing we want real, location-specific experience on rather than generic blog advice. If you have gone through the actual permitting/zoning process for off-grid systems (septic alternatives, solar, a well) in your specific county or country, what did you run into that no article warned you about?',
+ 'admin','approved'),
+
+('STARTING FROM ZERO — Staying Online Off-Grid: Starlink, a cell booster, or nothing at all by choice? If you have real numbers (actual speeds, monthly cost, how often it drops in bad weather), share them — this is one area where the gap between marketing and reality seems largest.',
+ 'admin','approved');
