@@ -4,9 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About — Peace Village</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -36,9 +33,34 @@
     </p>
 
     <div class="vision-gallery">
-      <figure><img src="assets/images/vision-1.jpg" alt="Peace Village vision — dome homes with solar panels overlooking the coast"></figure>
-      <figure><img src="assets/images/vision-2.jpg" alt="Peace Village vision — community gardens and shared pool at sunset by the sea"></figure>
+      <figure>
+        <div class="dither-reveal" data-reveal-size="28" style="width:100%;height:100%;">
+          <img class="color-layer" src="assets/images/vision-1-color.jpg" alt="Peace Village vision — dome homes with solar panels overlooking the coast">
+          <img class="dither-layer" src="assets/images/vision-1-dither.jpg" alt="">
+        </div>
+      </figure>
+      <figure>
+        <div class="dither-reveal" data-reveal-size="28" style="width:100%;height:100%;">
+          <img class="color-layer" src="assets/images/vision-2-color.jpg" alt="Peace Village vision — community gardens and shared pool at sunset by the sea">
+          <img class="dither-layer" src="assets/images/vision-2-dither.jpg" alt="">
+        </div>
+      </figure>
     </div>
+    <p style="color:hsl(var(--muted-foreground));font-size:0.82rem;font-style:italic;margin-top:-1rem;">
+      Move your cursor over a photo to reveal its true color.
+    </p>
+
+    <p class="step-section-label" style="margin-top:2.5rem;">A note on this design</p>
+    <p style="font-size:0.95rem;color:hsl(var(--muted-foreground));">
+      Peace Village's look and layout are inspired by
+      <a href="https://solar.lowtechmagazine.com" target="_blank" rel="noopener">solar.lowtechmagazine.com</a> —
+      its dithered photography, near-zero color, and no-webfont typography. This site borrows the
+      <em>look</em> only: order-8 Bayer ordered dithering and the reference site's own published
+      palette, reimplemented here from scratch (no code reused). There is no battery, no solar
+      hardware, and no live telemetry — Peace Village still runs on ordinary, grid-powered GitHub
+      Pages hosting. Design direction credited to Low-Tech Magazine's solar site (theme AGPL-3.0,
+      dither plugin GPLv3, Marie Otsuka &amp; Roel Roscam Abbing).
+    </p>
 
     <h2>Our Core Principles</h2>
     <ul>
@@ -72,5 +94,6 @@
 </footer>
 
 <script src="assets/js/site.js"></script>
+<script src="assets/js/dither-reveal.js"></script>
 </body>
 </html>

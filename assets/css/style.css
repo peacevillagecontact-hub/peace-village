@@ -1,20 +1,25 @@
-/* Peace Village — shared stylesheet. No build step: plain CSS, edit directly. */
+/* Peace Village — shared stylesheet. No build step: plain CSS, edit directly.
+   Visual direction: Low-Tech Magazine's solar site (solar.lowtechmagazine.com) — alice-blue
+   background, black text, a no-webfont serif stack, near-zero accent color, flat (unrounded,
+   unshadowed) components, and dithered/color-reveal photography. Look only: Peace Village still
+   runs on ordinary grid-powered GitHub Pages hosting — see the About page footer for credit. */
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222 84% 5%;
-  --muted: 210 40% 97%;
-  --muted-foreground: 215 16% 47%;
-  --card: 0 0% 100%;
-  --border: 214 32% 91%;
-  --primary: 142 76% 36%;
-  --primary-foreground: 356 100% 97%;
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222 47% 11%;
-  --destructive: 0 84% 60%;
-  --radius: 0.875rem;        /* Apple-style continuous corner radius */
-  --shadow-sm: 0 1px 2px hsla(222, 20%, 10%, 0.04), 0 1px 1px hsla(222, 20%, 10%, 0.03);
-  --shadow-md: 0 4px 16px hsla(222, 30%, 10%, 0.07), 0 1px 2px hsla(222, 30%, 10%, 0.04);
+  --background: 0 0% 100%;        /* white — cards, inputs */
+  --foreground: 0 0% 0%;          /* black text */
+  --muted: 208 100% 97%;          /* #f0f8ff — the page's "sky" background */
+  --muted-foreground: 0 0% 68%;   /* #adadad — captions, meta, secondary text */
+  --card: 208 100% 97%;           /* cards sit flush with the page, bordered only */
+  --border: 0 0% 76%;
+  --primary: 231 77% 38%;         /* #162dab — link/accent blue */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 92%;
+  --secondary-foreground: 0 0% 0%;
+  --destructive: 4 95% 42%;       /* #d11305 — error accent */
+  --success: 169 100% 21%;        /* #006951 — success accent */
+  --radius: 0;                    /* flat corners throughout */
+  --shadow-sm: none;
+  --shadow-md: none;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -30,9 +35,8 @@ html, body {
 }
 
 body {
-  /* Inter — matches the v0 reference site's font, loaded via Google Fonts (see each page's <head>) */
-  font-family: Inter, -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  /* No webfont — the browser's own default serif, same choice solar.lowtechmagazine.com makes. */
+  font-family: Georgia, "Times New Roman", Times, serif;
   text-rendering: optimizeLegibility;
   background: hsl(var(--muted));
   color: hsl(var(--foreground));
@@ -40,15 +44,17 @@ body {
   flex-direction: column;
   min-height: 100vh;
   line-height: 1.55;
+  font-size: 1.0625rem;
 }
 
-a { color: inherit; }
+a { color: hsl(var(--primary)); text-decoration: underline; text-decoration-thickness: 1px; }
+a:hover { color: #0c1d73; }
+.site-header a, .main-nav a, .brand, .btn, .tab-btn { text-decoration: none; }
 
-/* Visible, Apple-style focus ring instead of the browser default outline */
+/* Visible focus ring instead of the browser default outline */
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px hsla(var(--primary), 0.35);
-  border-radius: 0.3rem;
 }
 
 .container {
@@ -58,15 +64,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   padding: 0 1rem;
 }
 
-/* Header */
+/* Header — flat, no blur/glass; a plain rule under it, like a page header, not a floating bar */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: hsla(var(--background), 0.8);
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid hsla(var(--border), 0.8);
+  background: hsl(var(--muted));
+  border-bottom: 1px solid hsl(var(--foreground));
 }
 .site-header .bar {
   display: flex;
@@ -76,13 +80,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .brand {
   font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
-  text-decoration: none;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   white-space: nowrap;
+  color: hsl(var(--foreground));
 }
 .brand-icon { width: 1.3rem; height: 1.3rem; flex-shrink: 0; }
 .main-nav {
@@ -90,18 +93,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   flex-wrap: wrap;
   gap: 1.5rem;
   margin-left: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 .main-nav a {
   position: relative;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
   padding: 0.25rem 0;
   color: hsl(var(--muted-foreground));
   transition: color 0.15s var(--ease);
 }
-.main-nav a:hover { color: hsl(var(--foreground)); text-decoration: none; }
-.main-nav a.active { color: hsl(var(--foreground)); font-weight: 600; }
+.main-nav a:hover { color: hsl(var(--foreground)); }
+.main-nav a.active { color: hsl(var(--primary)); }
 .main-nav a.active::after {
   content: "";
   position: absolute;
@@ -130,124 +134,133 @@ main .container {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: hsl(var(--muted-foreground));
 }
 
-/* Typography — tighter tracking on display sizes, generous body leading (Apple HIG type scale) */
-h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.025em; line-height: 1.08; }
-h2 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.015em; margin-top: 2.5rem; }
-h3 { letter-spacing: -0.01em; }
-.lead { font-size: 1.15rem; line-height: 1.5; color: hsl(var(--muted-foreground)); }
+/* Typography — serif display sizes, generous body leading, uppercase section labels */
+h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.12; }
+h2 { font-size: 1.6rem; font-weight: 700; margin-top: 2.5rem; }
+h3 { font-weight: 700; }
+.lead { font-size: 1.1rem; line-height: 1.5; color: hsl(var(--muted-foreground)); }
 
-/* Buttons — min 44px touch target, Apple-style continuous radius, spring-like ease */
+/* Buttons — flat rectangles, no pill radius, no drop shadow */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   min-height: 2.75rem;
-  border-radius: 999px;
+  border-radius: var(--radius);
   padding: 0.65rem 1.5rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-  border: 1px solid transparent;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid hsl(var(--foreground));
   cursor: pointer;
-  transition: transform 0.15s var(--ease), opacity 0.15s var(--ease), background-color 0.15s var(--ease);
+  transition: opacity 0.15s var(--ease), background-color 0.15s var(--ease);
 }
-.btn-primary { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); box-shadow: var(--shadow-sm); }
-.btn-primary:hover { opacity: 0.92; }
-.btn-primary:active { transform: scale(0.97); }
-.btn-outline { background: hsl(var(--background)); border-color: hsl(var(--border)); color: hsl(var(--foreground)); }
+.btn-primary { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); border-color: hsl(var(--primary)); }
+.btn-primary:hover { opacity: 0.85; }
+.btn-outline { background: hsl(var(--muted)); border-color: hsl(var(--foreground)); color: hsl(var(--foreground)); }
 .btn-outline:hover { background: hsl(var(--secondary)); }
-.btn-outline:active { transform: scale(0.97); }
 
-/* Cards — soft elevation instead of a hard border, subtle lift on hover */
+/* Cards — flush with the page, bordered only, no elevation */
 .card {
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
-  border-radius: calc(var(--radius) + 0.25rem);
+  border-radius: var(--radius);
   padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
+  transition: border-color 0.2s var(--ease);
 }
 .grid { display: grid; gap: 1.25rem; }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-.grid-3 .card:hover, .post.card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.grid-3 .card:hover, .post.card:hover { border-color: hsl(var(--foreground)); }
 
 /* Hero */
 .hero { text-align: center; padding: 3.5rem 0 2.5rem; }
 .hero-actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-.hero-image { border-radius: 1.25rem; overflow: hidden; aspect-ratio: 2/1; margin-top: 3rem; box-shadow: var(--shadow-md); }
+.hero-image { border-radius: var(--radius); overflow: hidden; aspect-ratio: 2/1; margin-top: 3rem; border: 1px solid hsl(var(--border)); }
 .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .hero-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.25rem; }
 .hero-gallery .hero-image { margin-top: 0; aspect-ratio: 4/3; }
 
-.card-icon { display: block; width: 2.5rem; height: 2.5rem; margin-bottom: 0.75rem; }
+.card-icon { display: block; width: 2.25rem; height: 2.25rem; margin-bottom: 0.75rem; color: hsl(var(--foreground)); }
 .card > strong { display: block; font-size: 1.05rem; margin-bottom: 0.4rem; }
-.card-icon.icon-green { color: #16a34a; }
-.card-icon.icon-blue { color: #2563eb; }
-.card-icon.icon-yellow { color: #ca8a04; }
-.card-icon.icon-orange { color: #ea580c; }
-.card-icon.icon-purple { color: #9333ea; }
+/* Near-zero color: every card icon is black by default; this one class is the only accent. */
+.card-icon.icon-accent { color: hsl(var(--primary)); }
 
 /* Vision gallery (2 images side by side, stacks on narrow screens) */
 .vision-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
-.vision-gallery figure { margin: 0; border-radius: 1rem; overflow: hidden; aspect-ratio: 3/2; }
+.vision-gallery figure { margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 3/2; border: 1px solid hsl(var(--border)); }
 .vision-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Cursor dither-reveal — every real photo is colorless (dithered) by default; a circular lens
+   around the cursor reveals the true-color image underneath it. Driven by assets/js/dither-reveal.js
+   setting --mx/--my (cursor position, %) and --r (lens radius, %) on the element. Visual technique
+   only, reimplemented from scratch — see the About page for full credit to Low-Tech Magazine. */
+.dither-reveal { position: relative; overflow: hidden; cursor: crosshair; display: block; }
+.dither-reveal .color-layer { display: block; width: 100%; height: 100%; object-fit: cover; }
+.dither-reveal .dither-layer {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  -webkit-mask-image: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+    transparent 0%, transparent calc(var(--r, 0%) - 3%), black calc(var(--r, 0%) + 3%));
+  mask-image: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+    transparent 0%, transparent calc(var(--r, 0%) - 3%), black calc(var(--r, 0%) + 3%));
+}
 
 /* Start Here — numbered step path for a complete beginner */
 .step-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
 .step-card { display: flex; gap: 1.1rem; align-items: flex-start; }
 .step-num {
   flex: 0 0 auto;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 50%;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: var(--radius);
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 .step-body { flex: 1 1 auto; min-width: 0; }
 .step-body h3 { margin: 0 0 0.4rem; font-size: 1.1rem; }
 .step-body p { margin: 0 0 0.75rem; font-size: 0.95rem; color: hsl(var(--muted-foreground)); }
-.step-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; font-size: 0.88rem; }
-.step-links a { font-weight: 600; }
+.step-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; font-size: 0.85rem; }
+.step-links a { font-weight: 700; }
 .step-section-label {
   margin: 2.25rem 0 0.5rem;
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: hsl(var(--muted-foreground));
 }
 .step-section-label:first-child { margin-top: 1rem; }
 
 /* Forms */
-label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; }
+label { display: block; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.4rem; color: hsl(var(--muted-foreground)); }
 input[type=text], input[type=email], input[type=tel], input[type=url], input[type=number], textarea, select {
   width: 100%;
   min-height: 2.75rem;
   padding: 0.6rem 0.85rem;
   border: 1px solid hsl(var(--border));
-  border-radius: calc(var(--radius) - 0.25rem);
+  border-radius: var(--radius);
   font-size: 0.95rem;
-  background: hsl(var(--background));
   font-family: inherit;
-  transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  background: hsl(var(--background));
+  transition: border-color 0.15s var(--ease);
 }
-input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0.4); }
+input:hover, textarea:hover, select:hover, input:focus, textarea:focus, select:focus { border-color: hsl(var(--primary)); }
 .field { margin-bottom: 1.1rem; }
 .field-row { display: flex; gap: 1rem; }
 .field-row .field { flex: 1 1 0; }
 .form-note { font-size: 0.85rem; color: hsl(var(--muted-foreground)); margin-top: 0.3rem; }
-.form-note a { font-weight: 600; }
+.form-note a { font-weight: 700; }
 
 /* Map page */
 #map {
@@ -258,7 +271,7 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
   border: 1px solid hsl(var(--border));
   background: hsl(var(--muted));
 }
-.leaflet-popup-content-wrapper { border-radius: var(--radius); }
+.leaflet-popup-content-wrapper { border-radius: var(--radius); font-family: Georgia, "Times New Roman", Times, serif; }
 .map-popup h3 { margin: 0 0 0.35rem; font-size: 1rem; }
 .map-popup p { margin: 0 0 0.4rem; font-size: 0.88rem; }
 .map-popup .badge { margin-right: 0.25rem; }
@@ -272,9 +285,9 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
 .filters-bar input[type=text] { flex: 1 1 260px; width: auto; }
 .filters-bar select { flex: 0 1 180px; width: auto; }
 
-/* Tabs — Apple-style segmented pill control. Buttons stay side by side (never wrap to an
-   orphan row): on narrow screens the strip scrolls horizontally instead, with hidden
-   scrollbars and touch/trackpad momentum, so every tab stays reachable and tappable. */
+/* Tabs — flat segmented control. Buttons stay side by side (never wrap to an orphan row):
+   on narrow screens the strip scrolls horizontally instead, with hidden scrollbars and
+   touch/trackpad momentum, so every tab stays reachable and tappable. */
 .tabs-wrap { position: relative; margin-bottom: 1.5rem; }
 .tabs {
   display: flex;
@@ -284,7 +297,8 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   background: hsl(var(--secondary));
-  border-radius: 999px;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
   padding: 0.3rem;
   margin-bottom: 0;
 }
@@ -297,7 +311,6 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
   position: absolute;
   top: 0.3rem; right: 0; bottom: 0.3rem;
   width: 1.75rem;
-  border-radius: 0 999px 999px 0;
   background: linear-gradient(to right, transparent, hsl(var(--secondary)) 70%);
   pointer-events: none;
   opacity: 0;
@@ -309,17 +322,19 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
   padding: 0.5rem 0.8rem;
   border: none;
   background: none;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.82rem;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   white-space: nowrap;
   cursor: pointer;
   color: hsl(var(--muted-foreground));
-  transition: color 0.15s var(--ease), background-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  transition: color 0.15s var(--ease), background-color 0.15s var(--ease);
 }
 .tab-btn:hover { color: hsl(var(--foreground)); }
 .tab-icon { width: 15px; height: 15px; vertical-align: -3px; margin-right: 0.15rem; flex-shrink: 0; }
-.tab-btn.active { color: hsl(var(--foreground)); background: hsl(var(--background)); box-shadow: var(--shadow-sm); }
+.tab-btn.active { color: hsl(var(--background)); background: hsl(var(--foreground)); }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; animation: pv-fade-in 0.2s var(--ease); }
 
@@ -335,10 +350,11 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
   font-size: 0.9rem;
   margin-bottom: 1rem;
   display: none;
+  border: 1px solid transparent;
 }
 .alert.show { display: block; animation: pv-fade-in 0.2s var(--ease); }
-.alert-success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
-.alert-error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.alert-success { background: hsl(var(--muted)); color: hsl(var(--success)); border-color: hsl(var(--success)); }
+.alert-error { background: hsl(var(--muted)); color: hsl(var(--destructive)); border-color: hsl(var(--destructive)); }
 
 /* Lists (forum / resources) */
 .post {
@@ -349,22 +365,25 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
 .post-meta { font-size: 0.8rem; color: hsl(var(--muted-foreground)); margin-top: 0.4rem; }
 .badge {
   display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   padding: 0.15rem 0.6rem;
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: hsl(var(--secondary));
   color: hsl(var(--secondary-foreground));
+  border: 1px solid hsl(var(--border));
 }
 
 /* Donation */
 .qr-wrap { text-align: center; }
-.qr-wrap img { max-width: 220px; border-radius: 0.75rem; border: 1px solid hsl(var(--border)); box-shadow: var(--shadow-sm); }
+.qr-wrap img { max-width: 220px; border-radius: var(--radius); border: 1px solid hsl(var(--border)); }
 .btc-address {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   background: hsl(var(--secondary));
   padding: 0.6rem 0.85rem;
-  border-radius: calc(var(--radius) - 0.25rem);
+  border-radius: var(--radius);
   font-size: 0.85rem;
   word-break: break-all;
   display: block;
@@ -394,11 +413,11 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
 }
 .donate-info-row:last-child { border-bottom: none; }
 .donate-info-row > span { color: hsl(var(--muted-foreground)); flex: 0 0 auto; }
-.donate-info-row > strong { text-align: right; font-weight: 600; }
+.donate-info-row > strong { text-align: right; font-weight: 700; }
 .donate-info-address { flex-direction: column; align-items: stretch; gap: 0.5rem; }
 .donate-address-value { display: flex; align-items: center; gap: 0.5rem; }
 .donate-address-value .btc-address { flex: 1; margin-top: 0; }
-.btn-copy { flex: 0 0 auto; min-height: 2.25rem; padding: 0.4rem 0.9rem; font-size: 0.85rem; }
+.btn-copy { flex: 0 0 auto; min-height: 2.25rem; padding: 0.4rem 0.9rem; font-size: 0.78rem; }
 
 /* Donation warning banner — mirrors Gate's own "match the network" notice */
 .donate-warning {
@@ -408,16 +427,17 @@ input:hover, textarea:hover, select:hover { border-color: hsla(var(--primary), 0
   margin-top: 1.25rem;
   padding: 0.85rem 1rem;
   background: hsl(var(--secondary));
-  border-radius: calc(var(--radius) - 0.25rem);
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
   font-size: 0.85rem;
   color: hsl(var(--secondary-foreground));
   text-align: left;
 }
-.donate-warning span { flex: 0 0 auto; opacity: 0.6; }
+.donate-warning span { flex: 0 0 auto; opacity: 0.7; }
 .donate-warning p { margin: 0; }
 
 @media (min-width: 640px) {
-  h1 { font-size: 3.5rem; }
+  h1 { font-size: 3.25rem; }
 }
 
 /* Mobile refinements — tighter spacing, full-width stacked buttons, nav that never
