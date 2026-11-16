@@ -1,22 +1,21 @@
 /* Peace Village — shared stylesheet. No build step: plain CSS, edit directly.
-   Visual direction: Low-Tech Magazine's solar site (solar.lowtechmagazine.com) — alice-blue
-   background, black text, a no-webfont serif stack, near-zero accent color, flat (unrounded,
-   unshadowed) components, and dithered/color-reveal photography. Look only: Peace Village still
-   runs on ordinary grid-powered GitHub Pages hosting — see the About page footer for credit. */
+   Three accent colors used categorically: blue (#162dab) community/social,
+   red (#d11305) urgency/action, green (#006951) nature/ecology.
+   Warm cream background (#fff5d1), black text, no-webfont serif stack. */
 
 :root {
-  --background: 0 0% 100%;        /* white — cards, inputs */
+  --background: 46 100% 91%;      /* #fff5d1 — warm cream page background */
   --foreground: 0 0% 0%;          /* black text */
-  --muted: 208 100% 97%;          /* #f0f8ff — the page's "sky" background */
-  --muted-foreground: 0 0% 68%;   /* #adadad — captions, meta, secondary text */
-  --card: 208 100% 97%;           /* cards sit flush with the page, bordered only */
+  --muted: 46 100% 91%;           /* same cream — cards flush with page */
+  --muted-foreground: 0 0% 51%;   /* #828282 — captions, meta, secondary text */
+  --card: 46 100% 91%;            /* cards sit flush, bordered only */
   --border: 0 0% 76%;
-  --primary: 231 77% 38%;         /* #162dab — link/accent blue */
+  --primary: 231 77% 38%;         /* #162dab — blue: community, social, links */
   --primary-foreground: 0 0% 100%;
   --secondary: 0 0% 92%;
   --secondary-foreground: 0 0% 0%;
-  --destructive: 4 95% 42%;       /* #d11305 — error accent */
-  --success: 169 100% 21%;        /* #006951 — success accent */
+  --destructive: 4 95% 42%;       /* #d11305 — red: urgency, action, economy */
+  --success: 169 100% 21%;        /* #006951 — green: nature, ecology, land */
   --radius: 0;                    /* flat corners throughout */
   --shadow-sm: none;
   --shadow-md: none;
@@ -189,8 +188,11 @@ h3 { font-weight: 700; }
 
 .card-icon { display: block; width: 2.25rem; height: 2.25rem; margin-bottom: 0.75rem; color: hsl(var(--foreground)); }
 .card > strong { display: block; font-size: 1.05rem; margin-bottom: 0.4rem; }
-/* Near-zero color: every card icon is black by default; this one class is the only accent. */
+/* Three categorical accent colors — blue: community/social, red: action/economy, green: nature/ecology */
 .card-icon.icon-accent { color: hsl(var(--primary)); }
+.card-icon.icon-blue   { color: hsl(var(--primary)); }
+.card-icon.icon-red    { color: hsl(var(--destructive)); }
+.card-icon.icon-green  { color: hsl(var(--success)); }
 
 /* Vision gallery (2 images side by side, stacks on narrow screens) */
 .vision-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
